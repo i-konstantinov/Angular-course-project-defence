@@ -8,11 +8,15 @@ import { AboutComponent } from './about/about.component';
 import { CoreModule } from './core/core.module';
 import { CarModule } from './car/car.module';
 import { CarRoutingModule } from './car/car-routing.module';
+import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent
+    AboutComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

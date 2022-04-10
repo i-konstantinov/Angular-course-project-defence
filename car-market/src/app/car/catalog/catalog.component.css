@@ -86,7 +86,7 @@ input[type=submit] {
     font-size: 20px;
     font-weight: bold;
     width: 50%;
-    margin: 5px 5px 5px 25%;
+    margin: 5px 5px 5px;
     color: rgb(83, 81, 81);
     text-transform: uppercase;
     border-radius: 5px;
@@ -97,24 +97,9 @@ input[type=submit]:hover {
     cursor: pointer;
 }
 
-input.search {
-    width: 50%;
-}
-
-form label {
-    background: #385169;
-    color: white;
-    padding: 12px;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-}
-
 input[type=text],
-input[type=number],
-input[type=password],
-select,
-textarea {
-    width: 50%;
+input[type=number] {
+    width: 100%;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
@@ -126,12 +111,7 @@ textarea {
 input.difficulty {
     width: 20%;
 }
-
-div.form {
-    border-radius: 5px;
-    padding: 20px;
-    width: 36%;
-    margin: auto;
-    display: block;
-    background-color: #f3f3f2;
+input.search {
+    width: 50%;
 }
+

@@ -11,16 +11,11 @@ h1 {
     text-align: center;
     text-transform: uppercase;
 }
-
-
-
-img.car {
-    height: 500px;
-    width: 660px;
-    display: block;
-    margin: 0 auto;
-    text-align: center;
+h1 {
+    font-weight: bold;
+    color: floralwhite;
 }
+
 
 img.logo {
     width: 110px;
@@ -39,78 +34,11 @@ a {
     text-transform: uppercase;
 }
 
-div.details {
-    display: block;
-    margin: auto;
-    width: 50%;
-    background-color: white;
-    padding: 1em;
-}
+
 
 
 /* forms */
-form label {
-    background: #385169;
-    color: white;
-    padding: 12px;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-}
 
-input[type=text],
-input[type=number],
-input[type=password],
-select,
-textarea {
-    width: 100%;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    padding: 12px 20px 12px 12px;
-    border-radius: 0 4px 4px 4px;
-    margin: 8px 0 2em;
-}
-
-input.difficulty {
-    width: 20%;
-}
-
-
-
-div.form {
-    border-radius: 5px;
-    padding: 20px;
-    width: 36%;
-    margin: auto;
-    display: block;
-    background-color: #f3f3f2;
-}
-
-span.error {
-    animation: fadeOut 1s forwards;
-    animation-delay: 2s;
-    background: #EF5542;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 20px;
-    font-weight: normal;
-    position: relative;
-    float: right;
-    margin-top: 20px;
-    overflow: hidden;
-    display: block;
-}
-
-img#sadFaceImg{
-    display: block;
-    margin: 0 auto;
-}
-
-h2{
-    text-align: center;
-}
 
 
 /*Animations & Transitions
@@ -137,12 +65,6 @@ h2{
     }
 }
 
-
-h1 {
-    font-weight: bold;
-    color: floralwhite;
-}
-
 .acc {
     color: floralwhite;
 }
@@ -152,14 +74,6 @@ h1 {
     height: 125px;
 }
 
-div.imgHolder {
-    background-color: #f5ce62;
-    padding: 15px;
-    width: 670px;
-    
-    display: block;
-    margin: auto;    
-}
 
 
 

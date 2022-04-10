@@ -1,0 +1,61 @@
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
+h1 {
+    font-weight: bold;
+    color: floralwhite;
+}
+
+img.car {
+    height: 500px;
+    width: 660px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+div.imgHolder {
+    background-color: #f5ce62;
+    padding: 15px;
+    width: 670px;
+    
+    display: block;
+    margin: auto;    
+}
+
+div.details {
+    display: block;
+    margin: auto;
+    width: 50%;
+    background-color: white;
+    padding: 1em;
+}
+
+span {
+    font-weight: bolder;
+    font-size: 17px;
+    font-style: italic;
+    text-align: center;
+    padding: 10px;
+}
+a.btn {
+    border: none;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    width: 43%;
+    margin: 12px;
+    margin-left: 6%;
+    border-radius: 4px;
+    background: #607588;
+    color: white;
+}
+
+a.btn:hover {
+    background-color: #0B2133;
+    color: white;
+    cursor: pointer;
+}
