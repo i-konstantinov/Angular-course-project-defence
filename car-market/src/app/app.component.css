@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+
+div.container {
+    display: block;
+    text-align: center;
+}
+
+main {
+    border-radius: 15px;
+    padding: 0;
+}

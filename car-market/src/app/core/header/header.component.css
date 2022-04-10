@@ -1,0 +1,31 @@
+header {
+    list-style-type: none;
+    margin: 0 0 3em;
+    padding: 1em 1em;
+    background-color: #385169;
+    width: fit-content;
+}
+
+header ul {
+    margin: 0;
+    padding: 1em;
+    font-size: larger;
+}
+
+header ul li {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+header ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    font-weight: bold;
+    margin: 15px;
+}
+
+header ul li a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -1,0 +1,37 @@
+<h1>Car*Market</h1>
+<form>
+  <input type="text" class="search" name="search" placeholder="Search...">
+  <input type="number" name="from" class="difficulty"  placeholder="Price from...">
+  <span>-</span>
+  <input type="number" name="to" class="difficulty"  placeholder="Price to...">
+  <input type="submit" value="search">
+</form>
+
+<div class="catalog">
+    <div class="cube">
+        <img class="preview"
+          src="../../../assets/images/audi.jpg">
+        <p class="name">Audi</p>
+        <p><span>Price:</span>4200$</p>
+        
+        <button class="btn more">Description</button>
+        <div class="description"><p>Perfect family car</p></div>
+        
+        <a routerLink="/details" class="btn">Details</a>
+      </div>
+
+      <div class="cube">
+        <img class="preview"
+          src="../../../assets/images/camaro.jpg">
+        <p class="name">Camaro</p>
+        <p><span>Price:</span>5000$</p>
+        
+        <button id="descriptionBtn" class="btn more">Description</button>
+        <div class="description"><p>Nice Camaro bro!</p></div>
+        
+        <a routerLink="/details" class="btn">Details</a>
+      </div>
+  
+  <p>No cars in database. Create the first listing!</p>
+ 
+</div>
