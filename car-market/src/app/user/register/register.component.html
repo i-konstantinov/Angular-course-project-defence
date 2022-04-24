@@ -1,0 +1,25 @@
+<h1>Register a new User</h1>
+<div class="form">
+    <form #form="ngForm" class="login" (ngSubmit)="registerSubmitHandler(form)">
+        
+        <div>
+            <ul class="errors">
+                <li data-icon="❗️">this is an error</li>
+            </ul>
+        </div>
+
+        <label for="email">Email</label>
+        <input #email="ngModel" ngModel type="text" id="email" name="email">
+
+        <label for="phone">Phone</label>
+        <input #phone="ngModel" ngModel type="text" id="phone" name="phone">
+
+        <label for="password">Password</label>
+        <input #password="ngModel" ngModel type="password" id="password" name="password">
+        
+        <label for="rePass">Repeat Password</label>
+        <input #rePass="ngModel" ngModel type="password" id="rePass" name="rePass">
+
+        <input type="submit" value="Register">
+    </form>
+</div>

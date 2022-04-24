@@ -1,11 +1,14 @@
 const { verifySession } = require("../services/users");
 
 module.exports = () => (req, res, next) => {
-    const token = req.headers['x-authorization'];
+    
     try {
+        const token = req.headers['X-Authorization'];
         if (token) {
             const userData = verifySession(token);
             req.user = userData;
+            console.log('in auth middleware, user:')
+            console.log(userData);
         }
         next();
     } catch (err) {

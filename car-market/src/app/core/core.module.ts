@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { LocalStorage } from './injection-tokens';
 
 
 
@@ -16,10 +17,15 @@ import { FooterComponent } from './footer/footer.component';
     CommonModule,
     RouterModule
   ],
-  providers: [ ],
   exports: [
     HeaderComponent,
     FooterComponent
+  ],
+  providers: [
+    {
+      provide: LocalStorage,
+      useValue: window.localStorage
+    }
   ]
 })
 export class CoreModule { }

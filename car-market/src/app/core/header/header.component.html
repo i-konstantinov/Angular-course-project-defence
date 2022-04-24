@@ -1,20 +1,19 @@
 <header>
-    <ul>
-      <!-- {{#if loggedUser}} -->
+    <ul *ngIf="loggedUser">
       <li><img class="logo" src="./assets/images/logo.png"></li>
       <li>
-        <h2 class="username">Welcome, user!</h2>
+        <h2 class="username">Welcome, {{user?.email}}!</h2>
       </li>
       <li><a routerLink="/catalog">Browse</a></li>
       <li><a routerLink="/create">sell car</a></li>
       <li><a routerLink="/about">About</a></li>
-      <li><a routerLink="/logout">Logout</a></li>
-      <!-- {{else}} -->
+      <li><a (click)="logoutHandler()" routerLink="/user/logout">Logout</a></li>
+    </ul>
+    <ul *ngIf="!loggedUser">
       <li><img class="logo" src="./assets/images/carbicle.jpg"></li>
       <li><a routerLink="/catalog">Browse</a></li>
       <li><a routerLink="/about">About</a></li>
       <li><a routerLink="/register">Register</a></li>
       <li><a routerLink="/login">Login</a></li>
-      <!-- {{/if}} -->
     </ul>
   </header>

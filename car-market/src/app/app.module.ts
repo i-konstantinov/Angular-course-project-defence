@@ -3,29 +3,38 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CatalogComponent } from './car/catalog/catalog.component';
 import { AboutComponent } from './about/about.component';
 import { CoreModule } from './core/core.module';
 import { CarModule } from './car/car.module';
 import { CarRoutingModule } from './car/car-routing.module';
-import { RegisterComponent } from './auth/register/register.component';
-import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './user/register/register.component';
+import { LoginComponent } from './user/login/login.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { FormsModule } from '@angular/forms';
+
+import { UserService } from './user/user.service';
+import { CarService } from './car/car.service';
+import { UserModule } from './user/user.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent,
-    RegisterComponent,
-    LoginComponent
+    AboutComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     CarRoutingModule,
     AppRoutingModule,
     CoreModule,
-    CarModule
+    UserModule,
+    CarModule,
   ],
-  providers: [],
+  providers: [
+    UserService,
+    CarService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

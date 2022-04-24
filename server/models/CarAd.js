@@ -1,7 +1,6 @@
 const { model, Schema, Types: { ObjectId } } = require('mongoose');
 
 const schema = new Schema({
-    title: { type: String, required: true },
     brand: { type: String, minlength: [3, "Brand must be at least 3 symbols long"] },
     model: { type: String, required: true },
     year: { type: Number, validate: {
@@ -21,7 +20,7 @@ const schema = new Schema({
     } },
     img: { type: String, required: true },
     isSwappable: { type: Boolean, default: false },
-    _authorId: { type: ObjectId, ref: "User" },
+    authorId: { type: ObjectId, ref: "User" },
     comments: { type: [String], default: [] }
 });
 

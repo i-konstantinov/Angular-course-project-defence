@@ -11,7 +11,7 @@ const routes: Routes = [
         component: CatalogComponent
     },
     {
-        path: 'details',
+        path: 'details/:id',
         component: CarDetailsComponent
     },
     {
@@ -19,7 +19,7 @@ const routes: Routes = [
         component: CreateCarAdComponent
     },
     {
-        path: 'edit',
+        path: 'edit/:id',
         component: EditCarComponent
     }
 ];

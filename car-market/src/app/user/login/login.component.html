@@ -1,0 +1,19 @@
+<h1>Log In</h1>
+<div class="form">
+    <form #form="ngForm" class="login" (ngSubmit)="loginSubmitHandler(form)">
+        
+        <div>
+            <ul class="errors">
+                <li data-icon="❗️">this is an error</li>
+            </ul>
+        </div>
+
+        <label for="email">Email</label>
+        <input #email="ngModel" ngModel type="text" id="email" name="email">
+
+        <label for="password">Password</label>
+        <input #password="ngModel" ngModel type="password" id="password" name="password">
+
+        <input type="submit" value="Log-In">
+    </form>
+</div>

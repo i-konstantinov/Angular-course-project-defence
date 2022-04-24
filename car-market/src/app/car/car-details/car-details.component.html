@@ -1,16 +1,23 @@
-<h1>#CAR-NAME</h1>
-<div class="imgHolder">
-  <img class="car" src="../../../assets/images/generic.jpg">
-</div>
+<ng-container *ngIf="(carAd | async) as ad">
+  <h1>{{ad.brand}}, {{ad.model}}</h1>
+  <div class="imgHolder">
+    <img class="car" src="{{ad.img ? ad.img : '../../../assets/images/generic.jpg'}}">
+  </div>
+  
+  <div class="details">
+    <p><span>Description:</span> {{ad.description}}</p>
+    <p><span>Year:</span> {{ad.year}}</p>
+    <p><span>Price:</span>$ {{ad.price}}</p>
+    <p><span>Location:</span> {{ad.location}}</p>
+    <p><span>Seller's phone:</span> {{ad.phone}}</p>
 
-<div class="details">
-  <p><span>Description:</span> #CAR_DESCRIPTION</p>
-  <p><span>Price:</span>$ CAR_PRICE</p>
-  
-  <a class="btn" routerLink="/catalog">Back</a>
-  
-  <!-- {{#if user is author}} -->
-  <a class="btn" routerLink="/edit">Edit</a>
-  <a class="btn" >Delete</a>
-  
-</div>
+    <p *ngIf="ad.isSwappable">CAN BE SWAPPED</p>
+    <p *ngIf="!ad.isSwappable">This vehicle is not swappable!</p>
+    
+    <a class="btn" routerLink="/catalog">Back</a>
+    
+    <!-- {{#if user is author}} -->
+    <a class="btn" routerLink="/edit/{{ad._id}}">Edit</a>
+    <a class="btn" >Delete</a>
+  </div>
+</ng-container>

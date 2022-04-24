@@ -5,6 +5,7 @@ import { CatalogComponent } from "./catalog/catalog.component";
 import { CarDetailsComponent } from './car-details/car-details.component';
 import { CreateCarAdComponent } from './create-car-ad/create-car-ad.component';
 import { EditCarComponent } from './edit-car/edit-car.component';
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
     declarations: [ 
@@ -15,12 +16,13 @@ import { EditCarComponent } from './edit-car/edit-car.component';
     ],
     imports: [
       CommonModule,
-      RouterModule
+      RouterModule,
+      FormsModule
     ],
     providers: [ ],
     exports: [
         CatalogComponent,
-        CarDetailsComponent 
+        CreateCarAdComponent 
     ]
   })
 export class CarModule { }

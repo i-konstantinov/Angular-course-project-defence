@@ -16,7 +16,8 @@ div.cube {
     vertical-align: top;
     width: 250px;
     height: auto;
-    margin-bottom: 5px;
+    margin: 7px 5px;
+    /* margin-bottom: 5px; */
 }
 
 div.cube:hover p.name {
@@ -104,7 +105,7 @@ input[type=number] {
     border: 1px solid #ccc;
     box-sizing: border-box;
     padding: 12px 20px 12px 12px;
-    border-radius: 0 4px 4px 4px;
+    border-radius: 4px 4px 4px 4px;
     margin: 8px 0 2em;
 }
 
@@ -115,3 +116,7 @@ input.search {
     width: 50%;
 }
 
+.dash {
+    font-weight: bolder;
+    color: rgb(255, 255, 255);
+}

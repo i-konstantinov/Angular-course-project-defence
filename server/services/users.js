@@ -1,11 +1,12 @@
 const { hash, compare } = require('bcrypt');
 const User = require('../models/User');
+const CarAd = require('../models/CarAd');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = "qwe123verysecretstring123qwe";
 
 const blacklist = [];
 
-async function register(email, password) {
+async function register(email, password, phone) {
     const existing = await getUserByEmail(email);
     if (existing) {
         throw new Error('Email is taken');
@@ -13,7 +14,8 @@ async function register(email, password) {
     const hashedPassword = await hash(password, 10);
     const user = new User({
         email,
-        hashedPassword
+        hashedPassword,
+        phone
     });
     await user.save();
     return createSession(user);
@@ -21,6 +23,7 @@ async function register(email, password) {
 
 async function login(email, password) {
     const user =  await getUserByEmail(email);
+    if (user) {console.log(user)}
     if (!user) {
         throw new Error('Incorrect email or password');
     }
@@ -28,7 +31,9 @@ async function login(email, password) {
     if (!hasMatch) {
         throw new Error('Incorrect email or password');
     }
-    return createSession(user);
+    const userSession = createSession(user);
+
+    return userSession;
 }
 
 function logout(token) {
@@ -42,14 +47,20 @@ async function getUserByEmail(email) {
     return user;
 }
 
+async function getAddsByAuthorId(userId) {
+    return CarAd.find({}).where('_authorId').equals(userId);
+}
+
 
 function createSession(user) {
     return {
         email: user.email,
+        phone: user.phone,
         _id: user._id,
         accessToken: jwt.sign(
             {
                 email: user.email,
+                phone: user.phone,
                 _id: user._id
             },
             JWT_SECRET
@@ -65,6 +76,7 @@ function verifySession(token) {
     const payload = jwt.verify(token, JWT_SECRET);
     return {
         email: payload.email,
+        phone: payload.phone,
         _id: payload._id,
         token
     };
@@ -75,5 +87,6 @@ module.exports = {
     register,
     login,
     logout,
-    verifySession
+    verifySession,
+    getAddsByAuthorId
 }

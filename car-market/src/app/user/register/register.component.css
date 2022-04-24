@@ -17,6 +17,7 @@ form label {
 }
 
 input[type=text],
+input[type=password],
 input[type=number],
 select,
 textarea {
@@ -50,21 +51,7 @@ input[type=submit]:hover {
     cursor: pointer;
 }
 
-input.difficulty {
-    width: 20%;
-}
 
 ul.errors {
     background-color: rgb(238, 173, 173);
-}
-
-.radioYes {
-    background-color: green;
-    color: white;
-    width: fit-content;
-}
-.radioNo {
-    background-color: red;
-    color: white;
-    width: fit-content;
 }

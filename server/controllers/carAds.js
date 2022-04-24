@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const api = require('../services/carAds');
 const { mapErrors } = require('../utils/mappers');
-const { isUser, isOwner } = require('../middlewares/guards');
-const preload = require('../middlewares/preload');
 
 
 router.get('/', async (req, res) => {
@@ -10,9 +8,8 @@ router.get('/', async (req, res) => {
     res.json(data).end();
 });
 
-router.post('/', isUser(), async (req, res) => {
+router.post('/', async (req, res) => {
     const newCarAd = {
-        title: req.body.title,
         brand: req.body.brand,
         model: req.body.model,
         year: req.body.year,
@@ -22,7 +19,7 @@ router.post('/', isUser(), async (req, res) => {
         phone: req.body.phone,
         img: req.body.img,
         isSwappable: req.body.isSwappable,
-        _authorId: req.user._id,
+        authorId: req.body.authorId,
         comments: []
     }
 
@@ -37,8 +34,8 @@ router.post('/', isUser(), async (req, res) => {
     res.end();
 });
 
-router.get('/:id', preload(), (req, res) => {
-    const carAd = res.locals.carAd;
+router.get('/:id', async (req, res) => {
+    const carAd = await api.getById(req.params.id);
     res.json(carAd).end();
 });
 

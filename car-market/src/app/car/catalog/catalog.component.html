@@ -2,27 +2,35 @@
 <form>
   <input type="text" class="search" name="search" placeholder="Search car brand or model...">
   <br>
-  <input type="number" name="from" class="difficulty"  placeholder="Price from...">
-  <span>-</span>
-  <input type="number" name="to" class="difficulty"  placeholder="Price to...">
-    <br>
+  <input type="number" name="from" class="difficulty" placeholder="Price from...">
+  <span class="dash">-</span>
+  <input type="number" name="to" class="difficulty" placeholder="Price to...">
+  <br>
+  <input type="text" name="location" class="difficulty" placeholder="Location...">
+  <br>
   <input type="submit" value="search">
 </form>
 
 <div class="catalog">
-    <div class="cube">
-        <img class="preview"
-          src="../../../assets/images/audi.jpg">
-        <p class="name">Audi</p>
-        <p><span>Price:</span>4200$</p>
-        
-        <button class="btn more">Description</button>
-        <div class="description"><p>Perfect family car</p></div>
-        
-        <a routerLink="/details" class="btn">Details</a>
-      </div>
+  <div class="cube" *ngFor="let ad of (carAds | async)">
+    <img class="preview" src="{{(ad.img && ad.img != '') ? ad.img : '../../../../../assets/images/generic.jpg'}}">
+    <p class="name">{{ad.brand}} {{ad.model}}</p>
+    <p><span>Price:</span>{{ad.price}} $</p>
 
-      <div class="cube">
+    <button class="btn more">Description</button>
+    <div class="description">
+      <p>{{ad.description}}</p>
+    </div>
+
+    <a routerLink="/details/{{ad._id}}" class="btn">Details</a>
+  </div>
+</div>
+
+<div *ngIf="!(carAds | async)" class="catalog">
+  <p class="dash">NO ADS YET</p>
+</div>
+
+<!--<div class="cube">
         <img class="preview"
           src="../../../assets/images/camaro.jpg">
         <p class="name">Camaro</p>
@@ -32,8 +40,4 @@
         <div class="description"><p>Nice Camaro bro!</p></div>
         
         <a routerLink="/details" class="btn">Details</a>
-      </div>
-  
-  <p>No cars in database. Create the first listing!</p>
- 
-</div>
+      </div>-->
