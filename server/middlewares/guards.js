@@ -22,7 +22,7 @@ function isGuest() {
 
 function isOwner() {
     return function (req, res, next) {
-        if (req.user && req.user._id == res.locals.item._authorId) {
+        if (req.user && req.user._id == res.locals.item.authorId) {
             next();
         } else {
             res.status(403).json({

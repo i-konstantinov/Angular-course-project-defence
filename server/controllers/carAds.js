@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const preload = require('../middlewares/preload');
 const api = require('../services/carAds');
 const { mapErrors } = require('../utils/mappers');
 
@@ -34,7 +35,7 @@ router.post('/', async (req, res) => {
     res.end();
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', preload(), async (req, res) => {
     const carAd = await api.getById(req.params.id);
     res.json(carAd).end();
 });

@@ -48,7 +48,7 @@ async function getUserByEmail(email) {
 }
 
 async function getAddsByAuthorId(userId) {
-    return CarAd.find({}).where('_authorId').equals(userId);
+    return CarAd.find({}).where('authorId').equals(userId);
 }
 
 

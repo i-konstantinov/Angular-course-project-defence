@@ -5,7 +5,7 @@ const { mapErrors } = require('../utils/mappers');
 
 
 
-router.post('/register', isGuest(), async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
         // if (req.body.password.trim() != req.body.rePass.trim()) {
         //     throw new Error('Passwords don\'t match');
@@ -17,7 +17,7 @@ router.post('/register', isGuest(), async (req, res) => {
             req.body.phone.trim()
             );
         res.status(201).json(result);
-        console.log('User REGISTERED');
+        console.log('User REGISTERED and user data passed to client');
     } catch (err) {
         console.error(err.message);
         const error = mapErrors(err);
@@ -38,15 +38,13 @@ router.post('/login', isGuest(), async (req, res) => {
     res.end();
 });
 
-router.get('/logout', async (req, res) => {
-    console.log('in logout controller')
-    console.log(req);
-    // logout();
-    console.log('User logged-OUT');
+router.get('/logout', isUser(), async (req, res) => { 
+    const token = req.user.token;
+    logout(token);
     res.end();
 });
 
-router.get('/profile',  async (req, res) => {
+router.get('/profile', async (req, res) => {
     try {
         console.log('in user servive GET profile')
         console.log(req.url)

@@ -28,9 +28,6 @@ export class HeaderComponent {
 
   logoutHandler():void {
     this.userService.logout();
-    // this.userService.logout().subscribe(() => {
-    //   this.userService.currentUser = undefined
-    // });
     this.router.navigate(['/']);
   }
 }

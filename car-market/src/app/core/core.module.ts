@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LocalStorage } from './injection-tokens';
+import { AuthInterceptor } from './auth.interveptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 
@@ -25,6 +27,11 @@ import { LocalStorage } from './injection-tokens';
     {
       provide: LocalStorage,
       useValue: window.localStorage
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     }
   ]
 })

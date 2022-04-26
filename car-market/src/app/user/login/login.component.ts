@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IUser } from 'src/app/core/interfaces/user';
 import { UserService } from '../user.service';
 
 @Component({
@@ -17,18 +18,13 @@ export class LoginComponent {
 
   loginSubmitHandler(form: NgForm) {
     if (form.invalid) { return }
-    this.userService.login(form.value.email, form.value.password).subscribe({
-      next: (result) => {
-        localStorage.setItem('email', result.email)
-        localStorage.setItem('authToken', result.accessToken);
-        localStorage.setItem('phone', result.phone);
-        localStorage.setItem('userId', result._id);
-      },
+    this.userService.login(form.value.email, form.value.password)
+    .subscribe({
       error: (err) => {
         console.log(JSON.stringify(err.message));
       },
-      complete: () => {
-        this.router.navigate(['/'])
+      next: () => {
+        this.router.navigate(['/catalog']);
       }
     })
   }

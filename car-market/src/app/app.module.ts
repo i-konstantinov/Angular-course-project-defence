@@ -16,6 +16,8 @@ import { UserService } from './user/user.service';
 import { CarService } from './car/car.service';
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './core/auth.interveptor';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     CoreModule,
     UserModule,
     CarModule,
+    
   ],
   providers: [
     UserService,

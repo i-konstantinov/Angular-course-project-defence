@@ -24,7 +24,7 @@ export class UserService {
       let localStorageUser = this.localStorage.getItem('<USER>') || 'Error';
       this.currentUser = JSON.parse(localStorageUser);
     } catch (err) {
-      console.log(err);
+      console.log("Error trying to find current user");
       this.currentUser = undefined;
     }
   }
@@ -33,6 +33,8 @@ export class UserService {
     return this.http.post<IUser>(API_URL + '/user/register',
       { email, password, phone }).pipe(
         tap((user: any) => {
+          console.log('server responded');
+          console.log(user)
           this.currentUser = user;
           this.localStorage.setItem('<USER>', JSON.stringify(user));
         })
@@ -49,14 +51,26 @@ export class UserService {
   }
 
   logout() {
-    // this.currentUser = undefined;
-    // this.localStorage.clear();
-    return this.http.get(API_URL + '/user/logout').pipe(
-      tap(() => {
-        this.currentUser = undefined;
-        this.localStorage.clear();
-      })
+    const user = this.localStorage.getItem('<USER>');
+    const token = user ? JSON.parse(user) : undefined;
+    this.http.get(API_URL + '/user/logout', {
+      headers: { "X-Authorization": token }
+    }).subscribe(
+     {
+       next: () => {
+         this.currentUser = undefined;
+         this.localStorage.clear();
+       },
+       error: (err) => console.log(err),
+       complete: () => {}
+      }
     );
+    // return this.http.get(API_URL + '/user/logout').pipe(
+    //   tap(() => {
+    //     this.currentUser = undefined;
+    //     this.localStorage.clear();
+    //   })
+    // );
   }
 
   getProfileInfo() {
