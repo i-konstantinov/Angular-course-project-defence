@@ -1,1 +1,11 @@
-<p>profile works!</p>
+<div class="catalog" *ngIf="(userAds | async) as ads">
+    <ul>
+        <li class="name" *ngFor="let ad of ads">
+            {{ad.brand}} {{ad.model}}
+            <a routerLink="/details/{{ad._id}}" class="btn">Details</a>
+        </li>
+    </ul>
+</div>
+<div class="empty" *ngIf="!(userAds | async)">
+    <h1>You don't have any ads</h1>
+</div>

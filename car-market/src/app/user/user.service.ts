@@ -4,6 +4,7 @@ import { IUser } from '../core/interfaces/user';
 import { tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { LocalStorage } from '../core/injection-tokens';
+import { ICarAd } from '../core/interfaces/car-ad';
 const API_URL = environment.API_URL;
 
 
@@ -24,7 +25,7 @@ export class UserService {
       let localStorageUser = this.localStorage.getItem('<USER>') || 'Error';
       this.currentUser = JSON.parse(localStorageUser);
     } catch (err) {
-      console.log("Error trying to find current user");
+      console.log("Anonymus user");
       this.currentUser = undefined;
     }
   }
@@ -65,21 +66,14 @@ export class UserService {
        complete: () => {}
       }
     );
-    // return this.http.get(API_URL + '/user/logout').pipe(
-    //   tap(() => {
-    //     this.currentUser = undefined;
-    //     this.localStorage.clear();
-    //   })
-    // );
   }
 
-  getProfileInfo() {
-    return this.http.get<IUser>(API_URL + '/user/profile').pipe(
-      tap((user: any) => this.currentUser = user));
+  getAdsByUser() {
+    return this.http.get<ICarAd[] | []>(API_URL + '/user/myads');
   }
 
-  updateProfile(phone: string) {
-    return this.http.put(API_URL + '/user/profile', phone).pipe(
-      tap((user: any) => this.currentUser = user));
-  }
+  // updateProfile(phone: string) {
+  //   return this.http.put(API_URL + '/user/profile', phone).pipe(
+  //     tap((user: any) => this.currentUser = user));
+  // }
 }

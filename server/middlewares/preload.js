@@ -7,6 +7,7 @@ function preload() {
         try {
             const carAd = await carAdsService.getById(req.params.id);
             res.locals.carAd = carAd;
+            // console.log(res.locals)
             next();
         } catch (err) {
             res.status(404).json({ message: "Record not found" });

@@ -7,6 +7,7 @@ h1 {
 div.about {
     display: block;
     margin: auto;
+    margin-bottom: 20%;
     background-color: #f3f3f2;
     padding: 3em;
 }

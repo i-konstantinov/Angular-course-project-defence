@@ -24,7 +24,7 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'profile/:id',
+    path: 'myads',
     component: ProfileComponent
   }
 ];

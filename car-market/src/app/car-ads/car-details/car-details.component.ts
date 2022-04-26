@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ICarAd } from 'src/app/core/interfaces/car-ad';
 import { CarService } from '../car.service';
 
@@ -13,8 +13,16 @@ export class CarDetailsComponent {
   carAd: Observable<ICarAd>;
   constructor(
     private carService: CarService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.carAd = this.carService.loadAdById(this.activatedRoute.snapshot.params['id']);
+  }
+
+  deleteHandler(id: string) {
+    this.carService.deleteAd(id).subscribe({
+      error: (err) => console.log(err.error.message),
+      complete: () => this.router.navigate(['/catalog'])
+    });
   }
 }

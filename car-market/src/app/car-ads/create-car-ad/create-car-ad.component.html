@@ -8,7 +8,7 @@
       </ul>
     </div>
     
-    <label for="brand">Name</label>
+    <label for="brand">Brand</label>
     <input #brand="ngModel" ngModel type="text" id="brand" name="brand">
 
     <label for="model">Model</label>
@@ -32,11 +32,10 @@
     <label for="price">Phone</label>
     <input #phone="ngModel" ngModel type="text" id="phone" name="phone">
 
-    <label for="price">Can this vehicle be swapped?</label>
-      <p class="radioYes">YES <input type="radio" value="yes" name="isSwappable" ngModel></p>
-      <p class="radioNo">NO <input type="radio" value="no" name="isSwappable" ngModel></p>
+    <label class="checkbox" for="price">Can this vehicle be swapped?
+      <input #isSwappable="ngModel" ngModel type="checkbox" id="isSwappable" name="isSwappable">
+    </label>
     <br>
-
     <input type="submit" value="Create">
   </form>
 </div>

@@ -44,11 +44,9 @@ router.get('/logout', isUser(), async (req, res) => {
     res.end();
 });
 
-router.get('/profile', async (req, res) => {
+router.get('/myads', async (req, res) => {
     try {
-        console.log('in user servive GET profile')
-        console.log(req.url)
-        const result = await getAddsByAuthorId(req.params.id)
+        const result = await getAddsByAuthorId(req.user._id)
         res.json(result);
     } catch (err) {
         console.error(err.message);

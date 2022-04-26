@@ -18,6 +18,6 @@
     
     <!-- {{#if user is author}} -->
     <a class="btn" routerLink="/edit/{{ad._id}}">Edit</a>
-    <a class="btn" >Delete</a>
+    <a class="btn" (click)="deleteHandler(ad._id)" >Delete</a>
   </div>
 </ng-container>

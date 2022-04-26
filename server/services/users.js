@@ -41,9 +41,7 @@ function logout(token) {
 }
 
 async function getUserByEmail(email) {
-    const user = await User
-    .findOne({ email: new RegExp(`^${email}$`, 'i') })
-    .populate('carAds', 'brand');
+    const user = await User.findOne({ email: new RegExp(`^${email}$`, 'i') })
     return user;
 }
 

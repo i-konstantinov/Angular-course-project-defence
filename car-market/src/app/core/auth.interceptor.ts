@@ -19,7 +19,6 @@ export class AuthInterceptor implements HttpInterceptor {
                 headers: req.headers.set("X-Authorization",
                     user.accessToken)
             });
-
             return next.handle(cloned);
         }
         else {

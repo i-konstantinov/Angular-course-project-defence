@@ -21,4 +21,12 @@ export class CarService {
   createAd(carAd: ICarAd): Observable<ICarAd> {
     return this.http.post<ICarAd>(API_URL + '/catalog', carAd);
   }
+
+  updateAd(id: string, carAd: ICarAd): Observable<ICarAd> {
+    return this.http.put<ICarAd>(API_URL + '/catalog/' + id, carAd);
+  }
+
+  deleteAd(id: string): Observable<any> {
+    return this.http.delete(API_URL + '/catalog/' + id);
+  }
 }

@@ -39,7 +39,7 @@ input[type=submit] {
     font-size: 20px;
     font-weight: bold;
     width: 50%;
-    margin: 5px 5px;
+    margin-top: 30px;
     color: rgb(83, 81, 81);
     text-transform: uppercase;
     border-radius: 5px;
@@ -54,6 +54,20 @@ input.difficulty {
     width: 20%;
 }
 
+input[type='checkbox'] {
+    width: 10%;
+    height: 1.8em;
+    background:white;
+}
+
+
 ul.errors {
     background-color: rgb(238, 173, 173);
+}
+
+.checkbox {
+    background: #385169;
+    color: white;
+    padding: 12px;
+    border-radius: 4px;
 }

@@ -1,0 +1,44 @@
+<h1>Edit Ad</h1>
+<div class="form" *ngIf="carAd | async as ad">
+  <form #form="ngForm" (ngSubmit)="updateHandler(form, ad._id)">
+    <!-- {{#if errors}} -->
+    <div>
+      <ul class="errors">
+        <li data-icon="❗️">this is an error</li>
+      </ul>
+    </div>
+    
+    <label for="brand">Brand</label>
+    <input #brand="ngModel" [ngModel]="ad.brand" type="text" id="brand" name="brand" >
+
+    <label for="model">Model</label>
+    <input #model="ngModel" [ngModel]="ad.model" type="text" id="model" name="model">
+
+    <label for="year">Year</label>
+    <input #year="ngModel" [ngModel]="ad.year" type="number" id="year" name="year">
+
+    <label for="name">Description</label>
+    <textarea #description="ngModel" [ngModel]="ad.description" id="description" name="description"></textarea>
+
+    <label for="image">ImageUrl</label>
+    <input #img="ngModel" [ngModel]="ad.img" type="text" id="img" name="img">
+
+    <label for="location">Location</label>
+    <input #location="ngModel" [ngModel]="ad.location" type="text" id="location" name="location">
+
+    <label for="price">Price</label>
+    <input #price="ngModel" [ngModel]="ad.price" type="number" id="price" name="price">
+
+    <label for="price">Phone</label>
+    <input #phone="ngModel" [ngModel]="ad.phone" type="text" id="phone" name="phone">
+
+    <label class="checkbox" for="price">Can this vehicle be swapped?
+      <input #isSwappable="ngModel" [ngModel]="ad.isSwappable" type="checkbox" id="isSwappable" name="isSwappable">
+    </label>
+
+    <br> 
+
+    <input type="submit" value="Update">
+  </form>
+</div>
+<div class="form" *ngIf="!(carAd | async)">Loading data. . .</div>

@@ -6,8 +6,8 @@ module.exports = () => (req, res, next) => {
         if (token) {
             const userData = verifySession(token);
             req.user = userData;
-            console.log('in auth middleware, user:')
-            console.log(userData);
+            // console.log('in auth middleware, user:')
+            // console.log(userData);
         }
         next();
     } catch (err) {
