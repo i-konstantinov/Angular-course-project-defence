@@ -1,18 +1,29 @@
 <h1>Car*Market</h1>
-<form>
-  <input type="text" class="search" name="search" placeholder="Search car brand or model...">
+<form #form="ngForm" (ngSubmit)="searchHandler(form)">
+  <!-- Search by brand or model -->
+  <input #searchBrand="ngModel" ngModel type="text" class="search" name="searchBrand" placeholder="Search for a brand...">
   <br>
-  <input type="number" name="from" class="difficulty" placeholder="Price from...">
+  <input #searchModel="ngModel" ngModel type="text" class="search" name="searchModel" placeholder="Search for a model...">
+  <br>
+  <!-- Search by year -->
+  <input #minYear="ngModel" ngModel type="number" name="minYear" class="difficulty" placeholder="Year from...">
   <span class="dash">-</span>
-  <input type="number" name="to" class="difficulty" placeholder="Price to...">
+  <input #maxYear="ngModel" ngModel type="number" name="maxYear" class="difficulty" placeholder="Year to...">
   <br>
-  <input type="text" name="location" class="difficulty" placeholder="Location...">
+  <!-- Search by price -->
+  <input #minPrice="ngModel" ngModel type="number" name="minPrice" class="difficulty" placeholder="Price from...">
+  <span class="dash">-</span>
+  <input #maxPrice="ngModel" ngModel type="number" name="maxPrice" class="difficulty" placeholder="Price to...">
+  <br>
+  <!-- Search by location -->
+  <input #searchLocation="ngModel" ngModel type="text" name="searchLocation" class="difficulty" placeholder="Location...">
   <br>
   <input type="submit" value="search">
 </form>
 
-<div class="catalog">
-  <div class="cube" *ngFor="let ad of (carAds | async)">
+<!-- All Ads -->
+<div *ngIf="!searching" class="catalog">
+  <div class="cube" *ngFor="let ad of allCarAds">
     <img class="preview" src="{{(ad.img && ad.img != '') ? ad.img : '../../../../../assets/images/generic.jpg'}}">
     <p class="name">{{ad.brand}} {{ad.model}}</p>
     <p><span>Price:</span>{{ad.price}} $</p>
@@ -26,18 +37,26 @@
   </div>
 </div>
 
-<div *ngIf="!(carAds | async)" class="catalog">
-  <p class="dash">NO ADS YET</p>
+<!-- Ad-search results -->
+<div *ngIf="searching" class="catalog">
+  <div class="cube" *ngFor="let ad of searchedAds">
+    <img class="preview" src="{{(ad.img && ad.img != '') ? ad.img : '../../../../../assets/images/generic.jpg'}}">
+    <p class="name">{{ad.brand}} {{ad.model}}</p>
+    <p><span>Price:</span>{{ad.price}} $</p>
+
+    <button class="btn more">Description</button>
+    <div class="description">
+      <p>{{ad.description}}</p>
+    </div>
+    <a routerLink="/details/{{ad._id}}" class="btn">Details</a>
+  </div>
+  <br>
+  <p *ngIf="searchedAds!.length == 0" class="dash">No matching ads...</p>
+  <button class="cancel" (click)="cancelSearchHandler()">Cancel Search</button>
 </div>
 
-<!--<div class="cube">
-        <img class="preview"
-          src="../../../assets/images/camaro.jpg">
-        <p class="name">Camaro</p>
-        <p><span>Price:</span>5000$</p>
-        
-        <button id="descriptionBtn" class="btn more">Description</button>
-        <div class="description"><p>Nice Camaro bro!</p></div>
-        
-        <a routerLink="/details" class="btn">Details</a>
-      </div>-->
+
+<!-- no ads in DB -->
+<div *ngIf="!allCarAds" class="catalog">
+  <p class="dash">NO ADS YET</p>
+</div>

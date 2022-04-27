@@ -53,7 +53,7 @@ span {
     margin: 10px;
 }
 
-button, a.btn {
+a.btn {
     border: none;
     padding: 8px;
     text-align: center;
@@ -85,7 +85,7 @@ input[type=submit] {
     display: inline-block;
     font-size: 20px;
     font-weight: bold;
-    width: 50%;
+    width: 35%;
     margin: 5px 5px 5px;
     color: rgb(83, 81, 81);
     text-transform: uppercase;
@@ -118,4 +118,19 @@ input.search {
 .dash {
     font-weight: bolder;
     color: rgb(255, 255, 255);
+    font-size: larger;
+}
+
+.cancel {
+    border: none;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    width: 33%;
+    margin: 12px;
+    border-radius: 4px;
+    background: #607588;
+    color: white;
 }

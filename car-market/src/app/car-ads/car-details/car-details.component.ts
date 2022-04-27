@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ICarAd } from 'src/app/core/interfaces/car-ad';
+import { UserService } from 'src/app/user/user.service';
 import { CarService } from '../car.service';
 
 @Component({
@@ -11,18 +12,28 @@ import { CarService } from '../car.service';
 })
 export class CarDetailsComponent {
   carAd: Observable<ICarAd>;
+  loggedUser: boolean = false;
+  userIsAuthor: boolean = false;
+
   constructor(
     private carService: CarService,
+    private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
-    this.carAd = this.carService.loadAdById(this.activatedRoute.snapshot.params['id']);
+    this.loggedUser = this.userService.loggedUser;
+    this.carAd = this.carService.loadAdById(this.activatedRoute.snapshot.params['id'])
+    .pipe(
+      tap((ad) => this.userIsAuthor = ad.authorId == this.userService.currentUser?._id)
+    );
   }
 
   deleteHandler(id: string) {
-    this.carService.deleteAd(id).subscribe({
-      error: (err) => console.log(err.error.message),
-      complete: () => this.router.navigate(['/catalog'])
-    });
+    if (confirm("Are you sure you want to delete this ad ?")) {
+      this.carService.deleteAd(id).subscribe({
+        error: (err) => console.log(err.error.message),
+        complete: () => this.router.navigate(['/catalog'])
+      });
+    } else { return };
   }
 }

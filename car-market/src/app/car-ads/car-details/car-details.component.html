@@ -16,8 +16,8 @@
     
     <a class="btn" routerLink="/catalog">Back</a>
     
-    <!-- {{#if user is author}} -->
-    <a class="btn" routerLink="/edit/{{ad._id}}">Edit</a>
-    <a class="btn" (click)="deleteHandler(ad._id)" >Delete</a>
+    <!-- if user is author -->
+    <a *ngIf="userIsAuthor" class="btn" routerLink="/edit/{{ad._id}}">Edit</a>
+    <a *ngIf="userIsAuthor" class="btn" (click)="deleteHandler(ad._id)" >Delete</a>
   </div>
 </ng-container>
