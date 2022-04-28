@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { AuthActivate } from './core/auth.activate';
 import { ErrorComponent } from './error/error.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './user/login/login.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { RegisterComponent } from './user/register/register.component';
@@ -48,6 +49,10 @@ const routes: Routes = [
     path: 'error',
     component: ErrorComponent
   },
+  {
+    path: '**',
+    component: NotFoundComponent
+  }
 ];
 
 @NgModule({
