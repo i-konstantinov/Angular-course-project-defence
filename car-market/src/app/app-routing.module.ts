@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { AuthActivate } from './core/auth.activate';
+import { ErrorComponent } from './error/error.component';
 import { LoginComponent } from './user/login/login.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { RegisterComponent } from './user/register/register.component';
@@ -42,7 +43,11 @@ const routes: Routes = [
           authRequired: true,
           RedirectTo: '/login'
         }
-  }
+  },
+  {
+    path: 'error',
+    component: ErrorComponent
+  },
 ];
 
 @NgModule({

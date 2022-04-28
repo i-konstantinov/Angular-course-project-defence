@@ -9,6 +9,7 @@ import { AuthInterceptor } from './auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthActivate } from './auth.activate';
 import { AuthAuthor } from './auth.author';
+import { errorHandlerProvider } from './error-handler';
 
 
 
@@ -36,7 +37,8 @@ import { AuthAuthor } from './auth.author';
       multi: true
     },
     AuthActivate,
-    AuthAuthor
+    AuthAuthor,
+    errorHandlerProvider
   ]
 })
 export class CoreModule { }

@@ -17,12 +17,14 @@ import { CarService } from './car-ads/car.service';
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './core/auth.interceptor';
+import { ErrorComponent } from './error/error.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent
+    AboutComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
