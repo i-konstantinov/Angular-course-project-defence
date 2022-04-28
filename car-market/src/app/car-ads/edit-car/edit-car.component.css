@@ -71,3 +71,8 @@ ul.errors {
     padding: 12px;
     border-radius: 4px;
 }
+
+h1 {
+    font-weight: bold;
+    color: #385169;
+}

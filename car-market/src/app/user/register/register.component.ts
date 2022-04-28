@@ -22,7 +22,8 @@ export class RegisterComponent {
         this.router.navigate(['/'])
       },
       error: (err) => {
-        console.log(JSON.stringify(err.message));
+        // console.log(JSON.stringify(err.message));
+        throw err;
       }
     })
   }

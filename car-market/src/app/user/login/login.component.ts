@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { IUser } from 'src/app/core/interfaces/user';
 import { UserService } from '../user.service';
 
@@ -10,6 +11,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  login$: Observable<IUser> | undefined;
 
   constructor(
     private userService: UserService,
@@ -18,14 +20,13 @@ export class LoginComponent {
 
   loginSubmitHandler(form: NgForm) {
     if (form.invalid) { return }
-    this.userService.login(form.value.email, form.value.password)
-    .subscribe({
-      error: (err) => {
-        console.log(JSON.stringify(err.message));
-      },
-      next: () => {
-        this.router.navigate(['/catalog']);
-      }
-    })
+    this.login$ = this.userService.login(form.value.email, form.value.password);
+    this.login$
+      .subscribe({
+        error: (err) => { throw err },
+        complete: () => {
+          this.router.navigate(['/catalog']);
+        }
+      })
   }
 }

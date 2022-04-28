@@ -1,8 +1,10 @@
-
-
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
 h1 {
     font-weight: bold;
-    color: floralwhite;
+    color: #385169;
 }
 
 .catalog {
@@ -11,6 +13,7 @@ h1 {
     width: 50%;
     margin-left: 25%;
     margin-bottom: 23%;
+    border-radius: 10px;
 }
 
 .empty {

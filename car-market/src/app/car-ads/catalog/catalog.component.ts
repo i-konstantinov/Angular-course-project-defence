@@ -11,7 +11,7 @@ import { ISearch } from 'src/app/core/interfaces/search-fields';
   styleUrls: ['./catalog.component.css']
 })
 export class CatalogComponent {
-
+  
   allCarAds: ICarAd[] | undefined;
   searchedAds: ICarAd[] | undefined = [];
   searching: boolean = false;
@@ -23,7 +23,7 @@ export class CatalogComponent {
       (data) => this.allCarAds = data
     )
   }
-
+  
   cancelSearchHandler(): void {
     this.searching = false;
   }
@@ -95,4 +95,3 @@ function searchFilter(data: ICarAd[] | undefined, filters: ISearch) {
 
   return known;
 }
-

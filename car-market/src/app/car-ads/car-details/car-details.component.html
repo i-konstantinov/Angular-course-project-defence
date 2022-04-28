@@ -11,8 +11,8 @@
     <p><span>Location:</span> {{ad.location}}</p>
     <p><span>Seller's phone:</span> {{ad.phone}}</p>
 
-    <p *ngIf="ad.isSwappable">CAN BE SWAPPED</p>
-    <p *ngIf="!ad.isSwappable">This vehicle is not swappable!</p>
+    <p class="swappable" *ngIf="ad.isSwappable">CAN BE SWAPPED</p>
+    <p class="unSwappable" *ngIf="!ad.isSwappable">CANNOT BE SWAPPED</p>
     
     <a class="btn" routerLink="/catalog">Back</a>
     

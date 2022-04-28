@@ -1,12 +1,14 @@
 .mainbox {
     margin: auto;
-    height: 550px;
+    height: 450px;
     width: 550px;
     position: relative;
+    background-color:rgb(169, 215, 255);
+    border-radius: 10px;
   }
   
     .err {
-      color: #216088;
+      color: #4a94c2;
       font-family: 'Nunito Sans', sans-serif;
       font-size: 11rem;
       position:absolute;
@@ -15,7 +17,7 @@
     }
   
   .far {
-    color: #216088;
+    color: #4a94c2;
       font-family: 'Nunito Sans', sans-serif;
       font-size: 11rem;
       position:absolute;
@@ -25,7 +27,7 @@
   }
   
    .err2 {
-      color: #216088;
+      color: #4a94c2;
       font-family: 'Nunito Sans', sans-serif;
       font-size: 11rem;
       position:absolute;
@@ -37,6 +39,7 @@
       text-align: center;
       font-family: 'Nunito Sans', sans-serif;
       font-size: 1.6rem;
+      color: azure;
       position:absolute;
       left: 16%;
       top: 45%;
@@ -45,7 +48,7 @@
   
   a {
     text-decoration: none;
-    color: #216088;
+    color: #4a94c2;
   }
   
   a:hover {

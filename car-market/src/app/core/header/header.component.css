@@ -3,7 +3,7 @@ header {
     margin: 0 0 3em;
     padding: 1px;
     background-color: #385169;
-    width: 100%;
+    width: 103%;
     height: auto;
     text-align: left;
 }
@@ -21,6 +21,7 @@ header ul li a {
     text-transform: uppercase;
     color: white;
     font-weight: bold;
+    font-size: 1.4em;
     margin: 15px;
 }
 
@@ -31,9 +32,9 @@ header ul li a:hover {
 
 h2.username {
     font-style: italic;
-    font-size: larger;
+    font-size: 1.4em;
     text-align: center;
     color: #f5ce62;
-    margin-right: 20px;
-    margin-left: 30px;
+    margin: 20px;
+    
 }

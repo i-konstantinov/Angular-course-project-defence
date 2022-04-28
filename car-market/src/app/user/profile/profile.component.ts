@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CarService } from 'src/app/car-ads/car.service';
 import { ICarAd } from 'src/app/core/interfaces/car-ad';
 import { UserService } from '../user.service';
 

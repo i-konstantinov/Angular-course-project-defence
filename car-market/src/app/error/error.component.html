@@ -1,2 +1,5 @@
 <h1>ERROR!</h1>
-<p *ngIf="errorMessage" class="notification">{{errorMessage}}</p>
+<p  class="notification">{{errorMessage}}</p>
+<ng-container *ngIf="(queryParams | async) as qp" >
+    {{qp['msg']}}
+</ng-container>

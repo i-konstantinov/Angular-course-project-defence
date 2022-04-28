@@ -2,9 +2,10 @@ h1 {
     text-align: center;
     text-transform: uppercase;
 }
+
 h1 {
     font-weight: bold;
-    color: floralwhite;
+    color: #385169;
 }
 
 img.car {
@@ -19,9 +20,9 @@ div.imgHolder {
     background-color: #f5ce62;
     padding: 15px;
     width: 670px;
-    
+
     display: block;
-    margin: auto;    
+    margin: auto;
 }
 
 div.details {
@@ -39,6 +40,7 @@ span {
     text-align: center;
     padding: 10px;
 }
+
 a.btn {
     border: none;
     padding: 8px;
@@ -47,8 +49,8 @@ a.btn {
     display: inline-block;
     font-size: 18px;
     width: 43%;
-    margin: 12px;
-    margin-left: 6%;
+    margin: 1.5% 5%;
+
     border-radius: 4px;
     background: #607588;
     color: white;
@@ -58,4 +60,15 @@ a.btn:hover {
     background-color: #0B2133;
     color: white;
     cursor: pointer;
+}
+
+.swappable {
+    background-color: rgb(130, 232, 137);
+    width: fit-content;
+    margin: auto;
+}
+.unSwappable {
+    background-color: rgb(238, 173, 173);
+    width: fit-content;
+    margin: auto;
 }

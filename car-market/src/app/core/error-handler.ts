@@ -8,7 +8,7 @@ class MyErrorHandler implements ErrorHandler {
     handleError(error: any): void {
         if (error.error) {
             console.log(error['error'].message);
-            this.router.navigate(['/error'], {queryParams: { "msg": error['error'].message }});
+            this.router.navigate(['/error/'], {queryParams: { "msg": error['error'].message }});
         }
     }
 }

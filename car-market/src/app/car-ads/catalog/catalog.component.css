@@ -15,7 +15,7 @@ div.cube {
     background: white;
     vertical-align: top;
     width: 250px;
-    height: auto;
+    height: 475px;
     margin: 7px 5px;
 }
 
@@ -35,8 +35,10 @@ p.name {
     font-size: 20px;
     font-weight: bolder;
     text-transform: uppercase;
-    padding: 10px;
+    padding: 5px;
     border-bottom: 1px solid #2b415433;
+    height: 50px;
+    overflow: scroll;
 }
 
 span {
@@ -53,9 +55,10 @@ span {
     margin: 10px;
 }
 
-a.btn {
+button.btn, a.btn {
     border: none;
     padding: 8px;
+    text-transform: capitalize;
     text-align: center;
     text-decoration: none;
     display: inline-block;

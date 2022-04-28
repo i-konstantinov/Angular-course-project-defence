@@ -26,11 +26,11 @@
   <div class="cube" *ngFor="let ad of allCarAds">
     <img class="preview" src="{{(ad.img && ad.img != '') ? ad.img : '../../../../../assets/images/generic.jpg'}}">
     <p class="name">{{ad.brand}} {{ad.model}}</p>
-    <p><span>Price:</span>{{ad.price}} $</p>
 
-    <button class="btn more">Description</button>
-    <div class="description">
-      <p>{{ad.description}}</p>
+    <div #BriefInfo class="description">
+      <p><span>Price:</span>{{ad.price}} BGN</p>
+      <p><span>Year:</span>{{ad.year}}</p>
+      <p><span>Location:</span>{{ad.location}}</p>
     </div>
 
     <a routerLink="/details/{{ad._id}}" class="btn">Details</a>
@@ -44,10 +44,7 @@
     <p class="name">{{ad.brand}} {{ad.model}}</p>
     <p><span>Price:</span>{{ad.price}} $</p>
 
-    <button class="btn more">Description</button>
-    <div class="description">
-      <p>{{ad.description}}</p>
-    </div>
+
     <a routerLink="/details/{{ad._id}}" class="btn">Details</a>
   </div>
   <br>
