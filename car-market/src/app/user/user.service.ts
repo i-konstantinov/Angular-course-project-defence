@@ -52,18 +52,13 @@ export class UserService {
   }
 
   logout() {
-    const user = this.localStorage.getItem('<USER>');
-    const token = user ? JSON.parse(user) : undefined;
-    this.http.get(API_URL + '/user/logout', {
-      headers: { "X-Authorization": token }
-    }).subscribe(
+    this.http.get(API_URL + '/user/logout').subscribe(
      {
-       next: () => {
-         this.currentUser = undefined;
-         this.localStorage.clear();
-       },
        error: (err) => console.log(err),
-       complete: () => {}
+       complete: () => {
+        this.currentUser = undefined;
+        this.localStorage.clear();
+       }
       }
     );
   }
@@ -72,8 +67,4 @@ export class UserService {
     return this.http.get<ICarAd[] | []>(API_URL + '/user/myads');
   }
 
-  // updateProfile(phone: string) {
-  //   return this.http.put(API_URL + '/user/profile', phone).pipe(
-  //     tap((user: any) => this.currentUser = user));
-  // }
 }

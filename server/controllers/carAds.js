@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { isUser, isOwner } = require('../middlewares/guards');
 const preload = require('../middlewares/preload');
 const api = require('../services/carAds');
+const { updateUserAds } = require('../services/users');
 const { mapErrors } = require('../utils/mappers');
 
 
@@ -21,12 +22,13 @@ router.post('/', isUser(), async (req, res) => {
         phone: req.body.phone,
         img: req.body.img,
         isSwappable: req.body.isSwappable,
-        authorId: req.body.authorId,
+        authorId: req.user._id,
         comments: []
     }
 
     try {
         const result = await api.create(newCarAd);
+        await updateUserAds(result.authorId, result._id);
         res.status(201).json(result);
     } catch (err) {
         console.error(err.message);
@@ -40,6 +42,7 @@ router.get('/:id', preload(), async (req, res) => {
     const carAd = await api.getById(req.params.id);
     res.json(carAd).end();
 });
+
 
 router.put('/:id', preload(), isOwner(), async (req, res) => {
     const update = {

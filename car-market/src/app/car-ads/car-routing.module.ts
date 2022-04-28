@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthActivate } from '../core/auth.activate';
+import { AuthAuthor } from '../core/auth.author';
 import { CarDetailsComponent } from './car-details/car-details.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CreateCarAdComponent } from './create-car-ad/create-car-ad.component';
@@ -16,11 +18,21 @@ const routes: Routes = [
     },
     {
         path: 'create',
-        component: CreateCarAdComponent
+        component: CreateCarAdComponent,
+        canActivate: [AuthActivate],
+        data: {
+            authRequired: true,
+            RedirectTo: '/login'
+        }
     },
     {
         path: 'edit/:id',
-        component: EditCarComponent
+        component: EditCarComponent,
+        canActivate: [AuthAuthor],
+        data: {
+            authAuthorRequired: true,
+            RedirectTo: '/login'
+        }
     }
 ];
 

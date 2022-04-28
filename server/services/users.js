@@ -32,7 +32,6 @@ async function login(email, password) {
         throw new Error('Incorrect email or password');
     }
     const userSession = createSession(user);
-
     return userSession;
 }
 
@@ -49,6 +48,13 @@ async function getAddsByAuthorId(userId) {
     return CarAd.find({}).where('authorId').equals(userId);
 }
 
+async function updateUserAds(userId, adId) {
+    const user = await User.findOne({ _id: userId });
+    user.carAds.push(adId);
+    await user.save();
+    return user.carAds;
+}
+
 
 function createSession(user) {
     return {
@@ -62,7 +68,8 @@ function createSession(user) {
                 _id: user._id
             },
             JWT_SECRET
-        )
+        ),
+        carAds: user.carAds
     }
 }
 
@@ -76,6 +83,7 @@ function verifySession(token) {
         email: payload.email,
         phone: payload.phone,
         _id: payload._id,
+        carAds: payload.carAds,
         token
     };
 }
@@ -86,5 +94,6 @@ module.exports = {
     login,
     logout,
     verifySession,
-    getAddsByAuthorId
+    getAddsByAuthorId,
+    updateUserAds
 }

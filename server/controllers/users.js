@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { isUser, isGuest } = require('../middlewares/guards');
-const { register, login, getAddsByAuthorId, logout } = require('../services/users');
+const { register, login, getAddsByAuthorId, logout, updateUserAds } = require('../services/users');
 const { mapErrors } = require('../utils/mappers');
 
 
@@ -44,7 +44,7 @@ router.get('/logout', isUser(), async (req, res) => {
     res.end();
 });
 
-router.get('/myads', async (req, res) => {
+router.get('/myads', isUser(), async (req, res) => {
     try {
         const result = await getAddsByAuthorId(req.user._id)
         res.json(result);
@@ -55,5 +55,6 @@ router.get('/myads', async (req, res) => {
     }
     res.end();
 });
+
 
 module.exports = router;

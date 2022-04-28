@@ -7,6 +7,8 @@ import { FooterComponent } from './footer/footer.component';
 import { LocalStorage } from './injection-tokens';
 import { AuthInterceptor } from './auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthActivate } from './auth.activate';
+import { AuthAuthor } from './auth.author';
 
 
 
@@ -32,7 +34,17 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    AuthActivate,
+    AuthAuthor
   ]
 })
 export class CoreModule { }
+
+/**export class CoreModule {
+  constructor(@Optional() @SkipSelf() coreModule: CoreModule) {
+    if (coreModule) {
+      throw new Error('Core module should be imported only once!');
+    }
+  }
+} */

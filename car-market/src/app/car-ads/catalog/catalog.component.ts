@@ -30,6 +30,7 @@ export class CatalogComponent {
 
   searchHandler(form: NgForm): void {
     const filters = form.value;
+    // form.reset();
     this.searchedAds = searchFilter(this.allCarAds, filters)
     this.searching = true;
   }
@@ -40,11 +41,11 @@ function searchFilter(data: ICarAd[] | undefined, filters: ISearch) {
   
   let known: ICarAd[] = [];
 
-  if (filters.searchBrand != "") {
+  if (filters.searchBrand) {
     known = data.filter(ad => ad.brand.toLowerCase().includes(filters.searchBrand.toLowerCase()));
   }
 
-  if (filters.searchModel != "") {
+  if (filters.searchModel) {
     if (known.length > 0) {
       known = known.filter(ad => ad.model.toLowerCase().includes(filters.searchModel.toLowerCase()));
     } else {
@@ -52,7 +53,7 @@ function searchFilter(data: ICarAd[] | undefined, filters: ISearch) {
     }
   }
 
-  if (filters.searchLocation != "") {
+  if (filters.searchLocation) {
     if (known.length > 0) {
       known = known.filter(ad => ad.location.toLowerCase().includes(filters.searchLocation.toLowerCase()));
     } else {

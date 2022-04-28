@@ -19,12 +19,12 @@ export class CreateCarAdComponent {
 
   createAdHandler(form: NgForm) {
     let carAd = form.value;
-    carAd.isSwappable == "yes" ? carAd.isSwappable = true : carAd.isSwappable = false;
-    // carAd.authorId = "6256f46c9531f6746645e2ab";
-    carAd.authorId = this.userService.currentUser!._id;
+
+    carAd.isSwappable == "" ? carAd.isSwappable = false : null;
+
     this.carService.createAd(carAd).subscribe({
       error: (err) => console.log(err.error.message),
-      next: () => this.router.navigate(['/catalog'])
+      complete: () => this.router.navigate(['/catalog'])
     });
   }
 }

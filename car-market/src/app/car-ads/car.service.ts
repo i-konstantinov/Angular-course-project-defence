@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ICarAd } from '../core/interfaces/car-ad';
 import { environment } from 'src/environments/environment';
-import { map, Observable } from 'rxjs';
-import { ISearch } from '../core/interfaces/search-fields';
+import { Observable } from 'rxjs';
+
 const API_URL = environment.API_URL;
 
 @Injectable()
@@ -18,6 +18,10 @@ export class CarService {
 
   loadAdById(adId: string): Observable<ICarAd> {
     return this.http.get<ICarAd>(API_URL + '/catalog/' + adId);
+  }
+
+  getAdsByUser() {
+    return this.http.get<ICarAd[] | []>(API_URL + '/catalog/myads');
   }
 
   createAd(carAd: ICarAd): Observable<ICarAd> {
