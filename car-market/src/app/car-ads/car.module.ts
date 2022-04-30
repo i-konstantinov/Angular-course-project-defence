@@ -6,13 +6,18 @@ import { CarDetailsComponent } from './car-details/car-details.component';
 import { CreateCarAdComponent } from './create-car-ad/create-car-ad.component';
 import { EditCarComponent } from './edit-car/edit-car.component';
 import { FormsModule } from "@angular/forms";
+import { YearFiledValidatorDirective } from "../core/validators/year-filed-validator.directive";
+import { PriceFieldValidatorDirective } from "../core/validators/price-field-validator.directive";
+
 
 @NgModule({
     declarations: [ 
         CatalogComponent,
         CarDetailsComponent,
         CreateCarAdComponent,
-        EditCarComponent
+        EditCarComponent,
+        YearFiledValidatorDirective,
+        PriceFieldValidatorDirective
     ],
     imports: [
       CommonModule,

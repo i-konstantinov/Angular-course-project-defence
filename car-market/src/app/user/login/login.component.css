@@ -28,6 +28,7 @@ form label {
 input[type=text],
 input[type=password],
 input[type=number],
+input[type=email],
 select,
 textarea {
     width: 100%;
@@ -61,6 +62,24 @@ input[type=submit]:hover {
 }
 
 
-ul.errors {
+
+/* errors  */
+.errors {
     background-color: rgb(238, 173, 173);
+}
+
+p.error {
+    text-align: left;
+    border-radius: 0.3em;
+    color: red;
+    padding-top: 0;
+}
+
+.input-error {
+    flex: 0 1 100%;
+    border: 1px solid;
+    padding: 0.3em;
+    border-left: 0.3em solid red;
+    border-top-right-radius: 0.3em;
+    border-bottom-right-radius: 0.3em;
 }

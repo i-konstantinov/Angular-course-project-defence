@@ -59,9 +59,18 @@ input.difficulty {
     width: 20%;
 }
 
-ul.errors {
+/* errors  */
+.errors {
     background-color: rgb(238, 173, 173);
 }
+
+p.error {
+    text-align: left;
+    border-radius: 0.3em;
+    color: red;
+    padding-top: 0;
+}
+
 
 .checkbox {
     background: #385169;

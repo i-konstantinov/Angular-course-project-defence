@@ -1,36 +1,84 @@
 <h1>Create A New Car-Ad</h1>
 <div class="form">
   <form #form="ngForm" (ngSubmit)="createAdHandler(form)">
-    <!-- {{#if errors}} -->
-    <div>
-      <ul class="errors">
-        <li data-icon="❗️">this is an error</li>
-      </ul>
-    </div>
-    
+
     <label for="brand">Brand</label>
-    <input #brand="ngModel" ngModel type="text" id="brand" name="brand">
+    <input #brand="ngModel" ngModel type="text" id="brand" name="brand" required minlength="3">
+    <!--Brand field errors-->
+    <p *ngIf="brand.touched && brand.errors?.['required']" class="error">
+      Brand is required!
+    </p>
+    <p *ngIf="brand.touched && brand.errors?.['minlength']" class="error">
+      Brand must be at least 3 symbols long!
+    </p>
 
     <label for="model">Model</label>
-    <input #model="ngModel" ngModel type="text" id="model" name="model">
+    <input #model="ngModel" ngModel type="text" id="model" name="model" required>
+    <!--Model field errors-->
+    <p *ngIf="model.touched && model.errors?.['required']" class="error">
+      Model is required!
+    </p>
 
     <label for="year">Year</label>
-    <input #year="ngModel" ngModel type="number" id="year" name="year">
+    <input #year="ngModel" ngModel type="number" id="year" name="year" required appYearFiledValidator>
+    <!--Year field errors-->
+    <p *ngIf="year.touched && year.errors?.['required']" class="error">
+      Year is required!
+    </p>
+    <ng-container *ngIf="year.touched && year.errors?.['validator']">
+      <p class="error" *ngFor="let e of year.errors?.['validator']">
+        * {{e}}
+      </p>
+    </ng-container>
 
     <label for="name">Description</label>
-    <textarea #description="ngModel" ngModel id="description" name="description"></textarea>
+    <textarea #description="ngModel" ngModel id="description" name="description" required minlength="10"></textarea>
+    <!--Description field errors-->
+    <p *ngIf="description.touched && description.errors?.['required']" class="error">
+      Description is required!
+    </p>
+    <p *ngIf="description.touched && description.errors?.['minlength']" class="error">
+      Description must be at least 10 characters long
+    </p>
 
     <label for="image">ImageUrl</label>
-    <input #img="ngModel" ngModel type="text" id="img" name="img">
+    <input #img="ngModel" ngModel type="text" id="img" name="img" required>
+    <!--Img field errors-->
+    <p *ngIf="img.touched && img.errors?.['required']" class="error">
+      Image is required!
+    </p>
 
     <label for="location">Location</label>
-    <input #location="ngModel" ngModel type="text" id="location" name="location">
+    <input #location="ngModel" ngModel type="text" id="location" name="location" required>
+    <!--Location field errors-->
+    <p *ngIf="location.touched && location.errors?.['required']" class="error">
+      Location is required!
+    </p>
 
     <label for="price">Price</label>
-    <input #price="ngModel" ngModel type="number" id="price" name="price">
+    <input #price="ngModel" ngModel type="number" id="price" name="price" required min="0" appPriceFieldValidator>
+    <!--Price field errors-->
+    <p *ngIf="price.touched && price.errors?.['required']" class="error">
+      Price is required!
+    </p>
+    <p *ngIf="price.touched && price.errors?.['min']" class="error">
+      Price must be a positive number
+    </p>
+    <ng-container *ngIf="price.touched && price.errors?.['validator']">
+      <p class="error" *ngFor="let e of price.errors?.['validator']">
+        * {{e}}
+      </p>
+    </ng-container>
 
     <label for="price">Phone</label>
-    <input #phone="ngModel" ngModel type="text" id="phone" name="phone">
+    <input #phone="ngModel" ngModel type="text" id="phone" name="phone" required="true" minlength="10">
+    <!--Phone field errors-->
+    <p *ngIf="phone.touched && phone.errors?.['required']" class="error">
+      Phone is required!
+    </p>
+    <p *ngIf="phone.touched && phone.errors?.['minlength']" class="error">
+      Phone must be at least 10 characters long
+    </p>
 
     <label class="checkbox" for="price">Can this vehicle be swapped?
       <input #isSwappable="ngModel" ngModel type="checkbox" id="isSwappable" name="isSwappable">

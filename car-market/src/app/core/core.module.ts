@@ -10,6 +10,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthActivate } from './auth.activate';
 import { AuthAuthor } from './auth.author';
 import { errorHandlerProvider } from './error-handler';
+import { PriceFieldValidatorDirective } from './validators/price-field-validator.directive';
 
 
 
@@ -42,11 +43,3 @@ import { errorHandlerProvider } from './error-handler';
   ]
 })
 export class CoreModule { }
-
-/**export class CoreModule {
-  constructor(@Optional() @SkipSelf() coreModule: CoreModule) {
-    if (coreModule) {
-      throw new Error('Core module should be imported only once!');
-    }
-  }
-} */

@@ -29,7 +29,7 @@ export class EditCarComponent implements OnInit {
     if (form.invalid) { return };
     this.carsService.updateAd(id, form.value)
     .subscribe({
-      error: (err) => {console.log(err.error['message'])},
+      error: (err) => {throw err},
       next: () => this.router.navigate(['/details/' + this.activatedRoute.snapshot.params['id']])
     });
   }

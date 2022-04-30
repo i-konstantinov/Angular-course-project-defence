@@ -1,24 +1,50 @@
 <h1>Register a new User</h1>
 <div class="form">
     <form #form="ngForm" class="login" (ngSubmit)="registerSubmitHandler(form)">
-        
-        <div>
-            <ul class="errors">
-                <li data-icon="❗️">this is an error</li>
-            </ul>
-        </div>
 
         <label for="email">Email</label>
-        <input #email="ngModel" ngModel type="text" id="email" name="email">
+        <input #email="ngModel" ngModel id="email" type="email" name="email" required appEmailFieldValidator>
+
+        <!-- Email validation errors -->
+        <p *ngIf="email.touched && email.errors?.['required']" class="error">
+            Email is required!
+        </p>
+        <ng-container *ngIf="email.touched && email.errors?.['validator']">
+            <p class="error" *ngFor="let e of email.errors?.['validator']">
+                * {{e}}
+            </p>
+        </ng-container>
 
         <label for="phone">Phone</label>
-        <input #phone="ngModel" ngModel type="text" id="phone" name="phone">
+        <input #phone="ngModel" ngModel type="text" id="phone" name="phone" required appPhoneFieldValidator>
+
+        <!-- phone validation errors -->
+        <p *ngIf="phone.touched && phone.errors?.['required']" class="error">
+            Phone is required!
+        </p>
+        <p *ngIf="phone.touched && phone.errors?.['minlenght']" class="error">
+            Phone number must be at least 10 digits long
+        </p>
+        <ng-container *ngIf="phone.touched && phone.errors?.['validator']">
+            <p class="error" *ngFor="let e of phone.errors?.['validator']">
+                * {{e}}
+            </p>
+        </ng-container>
+
 
         <label for="password">Password</label>
-        <input #password="ngModel" ngModel type="password" id="password" name="password">
-        
+        <input #password="ngModel" ngModel type="password" id="password" name="password" required minlength="6">
+
         <label for="rePass">Repeat Password</label>
         <input #rePass="ngModel" ngModel type="password" id="rePass" name="rePass">
+
+        <!-- Password validation errors -->
+        <p *ngIf="password.touched && password.errors?.['required']" class="error">
+            Password is required!
+        </p>
+        <p *ngIf="password.touched && password.errors?.['minlength']" class="error">
+            Password must be at least 6 characters!
+        </p>
 
         <input type="submit" value="Register">
     </form>

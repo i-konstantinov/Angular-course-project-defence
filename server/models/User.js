@@ -8,7 +8,7 @@ const userSchema = new Schema({
         minlength: [10, "Phone number must be at least 10 digits long"],
         validate: {
         validator(value) {
-            return value.startsWith('+359') || value.startsWith('0');
+            return (value.startsWith('+359') || value.startsWith('0') && value.length >= 10);
         }, message: "Enter a valid phone number"
     } },
     carAds: { type: [ObjectId], default: [], ref: 'CarAd' }

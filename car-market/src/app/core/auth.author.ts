@@ -8,6 +8,7 @@ export class AuthAuthor implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot): boolean | UrlTree {
 
         let { authAuthorRequired, RedirectTo } = route.data;
+        console.log()
 
         if (authAuthorRequired && this.userService.currentUser?.carAds.includes(route.params['id'])) { return true }
 

@@ -5,6 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { EmailFieldValidatorDirective } from '../core/validators/email-field-validator.directive';
+import { PhoneFieldValidatorDirective } from '../core/validators/phone-field-validator.directive';
 
 
 
@@ -12,7 +14,9 @@ import { RouterModule } from '@angular/router';
   declarations: [
     RegisterComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    EmailFieldValidatorDirective,
+    PhoneFieldValidatorDirective
   ],
   imports: [
     CommonModule,
