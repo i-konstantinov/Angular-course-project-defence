@@ -21,14 +21,15 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { PhoneFieldValidatorDirective } from './core/validators/phone-field-validator.directive';
 import { LoadingService } from './core/loading/loading.service';
 import { LoadingComponent } from './core/loading/loading.component';
+import { ErrorsService } from './error/error.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
-    ErrorComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -37,13 +38,13 @@ import { LoadingComponent } from './core/loading/loading.component';
     AppRoutingModule,
     CoreModule,
     UserModule,
-    CarModule,
-    
+    CarModule
   ],
   providers: [
     UserService,
     CarService,
-    LoadingService
+    LoadingService,
+    ErrorsService
   ],
   bootstrap: [AppComponent]
 })

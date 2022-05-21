@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { ICarAd } from 'src/app/core/interfaces/car-ad';
 import { LoadingService } from 'src/app/core/loading/loading.service';
+import { ErrorsService } from 'src/app/error/error.service';
 import { UserService } from 'src/app/user/user.service';
 import { CarService } from '../car.service';
 
@@ -17,6 +18,7 @@ export class CarDetailsComponent implements OnInit {
   userIsAuthor: boolean = false;
 
   constructor(
+    private errorsService: ErrorsService,
     private loadingService: LoadingService,
     private carService: CarService,
     private userService: UserService,
@@ -27,9 +29,14 @@ export class CarDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.loggedUser = this.userService.loggedUser;
     const ad$ = this.carService.loadAdById(this.activatedRoute.snapshot.params['id'])
-    .pipe(
-      tap((ad) => this.userIsAuthor = ad.authorId == this.userService.currentUser?._id)
-    );
+      .pipe(
+        catchError(err => {
+          this.errorsService.showErrors(err["error"].message);
+          console.log("Error cought:", err);
+          return throwError(err);
+        }),
+        tap((ad) => this.userIsAuthor = ad.authorId == this.userService.currentUser?._id)
+      );
     const loadingAd$ = this.loadingService.showLoaderUntilCompleted(ad$);
     this.carAd = loadingAd$;
   }

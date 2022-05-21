@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ICarAd } from 'src/app/core/interfaces/car-ad';
+import { ErrorsService } from 'src/app/error/error.service';
 import { CarService } from '../car.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class EditCarComponent implements OnInit {
   carAd: Observable<ICarAd> | undefined;
 
   constructor(
+    private errorsService: ErrorsService,
     private activatedRoute: ActivatedRoute,
     private carsService: CarService,
     private router: Router
@@ -29,7 +31,7 @@ export class EditCarComponent implements OnInit {
     if (form.invalid) { return };
     this.carsService.updateAd(id, form.value)
     .subscribe({
-      error: (err) => {throw err},
+      error: (err) => this.errorsService.showErrors(err.error.message),
       next: () => this.router.navigate(['/details/' + this.activatedRoute.snapshot.params['id']])
     });
   }

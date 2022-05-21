@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable, tap } from 'rxjs';
+import { ErrorsService } from './error.service';
 
 @Component({
   selector: 'app-error',
@@ -8,11 +9,25 @@ import { Observable } from 'rxjs';
   styleUrls: ['./error.component.css']
 })
 
-export class ErrorComponent {
-  errorMessage: string | undefined;
+export class ErrorComponent implements OnInit {
+  showErrorMessage = false;
+  errors$: Observable<string[]> | undefined;
+  
   queryParams: Observable<Params> | undefined;
-  constructor(private activatedRoute: ActivatedRoute) {
-    this.queryParams = this.activatedRoute.params;
-    this.errorMessage = this.activatedRoute.snapshot.queryParams['msg'];
+  
+  constructor(
+    private router: Router,
+    public errorsService: ErrorsService,
+    ) { }
+  
+  ngOnInit(): void {
+    this.errors$ = this.errorsService.errors$.pipe(
+      tap(() => this.showErrorMessage = true)
+    )
+  }
+
+  onClose() {
+    this.showErrorMessage = false;
+    this.router.navigate(["/catalog"]);
   }
 }

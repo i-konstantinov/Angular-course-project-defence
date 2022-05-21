@@ -9,7 +9,6 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthActivate } from './auth/auth.activate';
 import { AuthAuthor } from './auth/auth.author';
-import { errorHandlerProvider } from './error-handler';
 import { LoadingComponent } from './loading/loading.component';
 
 
@@ -40,8 +39,7 @@ import { LoadingComponent } from './loading/loading.component';
       multi: true
     },
     AuthActivate,
-    AuthAuthor,
-    errorHandlerProvider
+    AuthAuthor
   ]
 })
 export class CoreModule { }

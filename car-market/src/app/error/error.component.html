@@ -1,5 +1,13 @@
-<h1>ERROR!</h1>
-<p  class="notification">{{errorMessage}}</p>
-<ng-container *ngIf="(queryParams | async) as qp" >
-    {{qp['msg']}}
+<!-- <p  class="notification">{{errorMessage}}</p>
+    <ng-container *ngIf="(queryParams | async) as qp" >
+        {{qp['msg']}}
+    </ng-container> -->
+    <ng-container *ngIf="(errors$ | async) as errors">
+        <div class="notification" *ngIf="showErrorMessage">
+        <h1>ERROR!</h1>
+        <div class="message" *ngFor="let e of errors">
+            {{e}}
+        </div>
+        <button class="close" (click)="onClose()">Back to Browsing</button>
+    </div>
 </ng-container>

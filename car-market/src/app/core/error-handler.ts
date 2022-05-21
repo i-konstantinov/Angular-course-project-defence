@@ -1,4 +1,4 @@
-
+/*
 import { ErrorHandler, Provider } from "@angular/core";
 import { Router } from "@angular/router";
 
@@ -18,3 +18,4 @@ export const errorHandlerProvider: Provider = {
     useFactory: (router: Router) => new MyErrorHandler(router),
     deps: [Router]
 }
+*/

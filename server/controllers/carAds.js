@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
     }, 1000);
 });
 
+
 router.post('/', isUser(), async (req, res) => {
     const newCarAd = {
         brand: req.body.brand,
@@ -31,20 +32,19 @@ router.post('/', isUser(), async (req, res) => {
     try {
         const result = await api.create(newCarAd);
         await updateUserAds(result.authorId, result._id);
-        setTimeout(() => {
-            res.status(201).json(result);
-        }, 2000);
     } catch (err) {
         console.error(err.message);
         const error = mapErrors(err);
         res.status(400).json({ message: error });
     }
-    res.end();
+    
+    setTimeout(() => { res.end() }, 1000);
 });
+
 
 router.get('/:id', preload(), async (req, res) => {
     const carAd = await api.getById(req.params.id);
-    setTimeout(() => { res.json(carAd).end(); }, 1000);
+    setTimeout(() => { res.json(carAd).end() }, 1000);
     
 });
 
@@ -63,16 +63,16 @@ router.put('/:id', preload(), isOwner(), async (req, res) => {
     }
     try {
         const result = await api.updateAd(req.params.id, update);
-        setTimeOut(() => {
-            res.json(result);
-        }, 2000 );
+        res.json(result);
     } catch(err) {
         console.error(err.message);
         const error = mapErrors(err);
         res.status(400).json({ message: error });
     }
-    res.end();
+
+    setTimeout(() => { res.end() }, 1000);
 });
+
 
 router.delete('/:id', preload(), isOwner(), async (req, res) => {
     try {
@@ -85,7 +85,7 @@ router.delete('/:id', preload(), isOwner(), async (req, res) => {
         const error = mapErrors(err);
         res.status(400).json({ message: error });
     }
-    res.end();
+    setTimeout(() => { res.end() }, 1000);
 });
 
 module.exports = router;
