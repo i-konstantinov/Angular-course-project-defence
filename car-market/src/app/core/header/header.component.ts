@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/user/user.service';
-import { IUser } from '../interfaces/user';
+
+import { UserStore } from 'src/app/user/user.store';
+import { ErrorsService } from '../error/error.service';
 
 @Component({
   selector: 'app-header',
@@ -9,25 +10,16 @@ import { IUser } from '../interfaces/user';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor(private userService: UserService, private router: Router) { 
-    // this.userService.getProfileInfo().subscribe({
-    //   next: (user) => this.userService.currentUser = user,
-    //   error: (err) => {
-    //     this.userService.currentUser = undefined
-    //     throw err;
-    //   }
-    // });
-  }
-
-  get loggedUser(): boolean {
-    return this.userService.loggedUser;
-  }
-  get user(): IUser | undefined {
-    return this.userService.currentUser;
-  }
+  constructor(
+    public auth: UserStore,
+    private errorsService: ErrorsService,
+    private router: Router
+    ) { }
 
   logoutHandler():void {
-    this.userService.logout();
-    this.router.navigate(['/']);
+    this.auth.logout().subscribe({
+      next: () => this.router.navigate(['/about']),
+      error: (err) => this.errorsService.showErrors(err.error.message, err.message)
+    });
   }
 }

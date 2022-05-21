@@ -1,9 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import {  NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CarService } from '../car.service';
-import { UserService } from 'src/app/user/user.service';
-import { ErrorsService } from 'src/app/error/error.service';
+import { ErrorsService } from 'src/app/core/error/error.service';
 
 @Component({
   selector: 'app-create-car-ad',
@@ -20,7 +19,7 @@ export class CreateCarAdComponent {
 
   createAdHandler(form: NgForm) {
     if (form.invalid) { return }
-    
+
     let carAd = form.value;
 
     carAd.isSwappable == "" ? carAd.isSwappable = false : null;

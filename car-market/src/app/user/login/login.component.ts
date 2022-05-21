@@ -2,8 +2,9 @@ import { Component, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ErrorsService } from 'src/app/core/error/error.service';
 import { IUser } from 'src/app/core/interfaces/user';
-import { UserService } from '../user.service';
+import { UserStore } from '../user.store';
 
 @Component({
   selector: 'app-login',
@@ -14,16 +15,17 @@ export class LoginComponent {
   login$: Observable<IUser> | undefined;
 
   constructor(
-    private userService: UserService,
+    private userStore: UserStore,
+    private errorsService: ErrorsService,
     private router: Router
   ) { }
 
   loginSubmitHandler(form: NgForm) {
     if (form.invalid) { return }
-    this.login$ = this.userService.login(form.value.email, form.value.password);
-    this.login$
+  
+    this.userStore.login(form.value.email, form.value.password)
       .subscribe({
-        error: (err) => { throw err },
+        error: (err) => { this.errorsService.showErrors(err.message, err.error.message) },
         complete: () => {
           this.router.navigate(['/catalog']);
         }

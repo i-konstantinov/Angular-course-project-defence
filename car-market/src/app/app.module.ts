@@ -1,50 +1,43 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { AboutComponent } from './about/about.component';
-import { CoreModule } from './core/core.module';
 import { CarModule } from './car-ads/car.module';
 import { CarRoutingModule } from './car-ads/car-routing.module';
-import { RegisterComponent } from './user/register/register.component';
-import { LoginComponent } from './user/login/login.component';
-import { ProfileComponent } from './user/profile/profile.component';
-import { FormsModule } from '@angular/forms';
-
-import { UserService } from './user/user.service';
-import { CarService } from './car-ads/car.service';
+import { CoreModule } from './core/core.module';
 import { UserModule } from './user/user.module';
-import { HttpClientModule } from '@angular/common/http';
-import { ErrorComponent } from './error/error.component';
+
+import { AboutComponent } from './about/about.component';
+import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { PhoneFieldValidatorDirective } from './core/validators/phone-field-validator.directive';
+
+import { CarService } from './car-ads/car.service';
 import { LoadingService } from './core/loading/loading.service';
-import { LoadingComponent } from './core/loading/loading.component';
-import { ErrorsService } from './error/error.service';
+import { ErrorsService } from './core/error/error.service';
+import { UserStore } from './user/user.store';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
-    NotFoundComponent,
-    ErrorComponent
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     CarRoutingModule,
     AppRoutingModule,
+    HttpClientModule,
     CoreModule,
     UserModule,
     CarModule
   ],
   providers: [
-    UserService,
     CarService,
     LoadingService,
-    ErrorsService
+    ErrorsService,
+    UserStore
   ],
   bootstrap: [AppComponent]
 })

@@ -10,6 +10,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthActivate } from './auth/auth.activate';
 import { AuthAuthor } from './auth/auth.author';
 import { LoadingComponent } from './loading/loading.component';
+import { ErrorComponent } from './error/error.component';
 
 
 
@@ -17,7 +18,8 @@ import { LoadingComponent } from './loading/loading.component';
   declarations: [ 
     HeaderComponent, 
     FooterComponent,
-    LoadingComponent
+    LoadingComponent,
+    ErrorComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { LoadingComponent } from './loading/loading.component';
   exports: [
     HeaderComponent,
     FooterComponent,
-    LoadingComponent
+    LoadingComponent,
+    ErrorComponent
   ],
   providers: [
     {

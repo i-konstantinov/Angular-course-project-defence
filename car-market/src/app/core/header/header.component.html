@@ -1,8 +1,8 @@
 <header>
-    <ul *ngIf="loggedUser">
+    <ul *ngIf="auth.isLoggedIn$ | async">
       <li><img class="logo" src="../../../assets/images/logo.jpg"></li>
-      <li>
-        <h2 class="username">Welcome, {{user?.email}}!</h2>
+      <li *ngIf="(auth.user$ | async) as user">
+        <h2 class="username">Welcome, {{user.email}}!</h2>
       </li>
       <li><a routerLink="/catalog">Browse</a></li>
       <li><a routerLink="/create">sell car</a></li>
@@ -10,7 +10,7 @@
       <li><a routerLink="/about">About</a></li>
       <li><a (click)="logoutHandler()" routerLink="/user/logout">Logout</a></li>
     </ul>
-    <ul *ngIf="!loggedUser">
+    <ul *ngIf="auth.isLoggedOut$ | async">
       <li><img class="logo" src="../../../assets/images/logo.jpg"></li>
       <li><a routerLink="/catalog">Browse</a></li>
       <li><a routerLink="/about">About</a></li>

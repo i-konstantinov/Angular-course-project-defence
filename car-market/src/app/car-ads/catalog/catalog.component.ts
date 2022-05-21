@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ICarAd } from '../../core/interfaces/car-ad'
 
 import { ISearch } from 'src/app/core/interfaces/search-fields';
-import { catchError, finalize, Observable, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { LoadingService } from 'src/app/core/loading/loading.service';
-import { ErrorsService } from 'src/app/error/error.service';
+import { ErrorsService } from 'src/app/core/error/error.service';
 
 @Component({
   selector: 'app-catalog',
@@ -32,8 +32,8 @@ export class CatalogComponent implements OnInit  {
     const ads$ = this.carAdsService.loadAds()
       .pipe(
         catchError(err => {
-          this.errorsService.showErrors("Could not load catalog");
-          console.log("Error cought:", err);
+          this.errorsService.showErrors(err.error.message);
+          console.log("Error :", err);
           return throwError(err);
         })
       );

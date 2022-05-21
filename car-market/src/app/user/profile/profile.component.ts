@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICarAd } from 'src/app/core/interfaces/car-ad';
-import { UserService } from '../user.service';
+import { UserStore } from '../user.store';
+
 
 
 @Component({
@@ -9,11 +10,13 @@ import { UserService } from '../user.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
-  userAds: Observable<ICarAd[]> | undefined;
+export class ProfileComponent implements OnInit {
+  userAds$: Observable<ICarAd[]> | undefined;
   constructor(
-    private userService: UserService
-  ) {
-    this.userAds = this.userService.getAdsByUser();
+    private store: UserStore
+  ) { }
+
+  ngOnInit(): void {
+    this.userAds$ = this.store.getAdsByUser();
   }
 }

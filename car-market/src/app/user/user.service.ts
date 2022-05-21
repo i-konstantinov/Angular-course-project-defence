@@ -1,3 +1,4 @@
+/*
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { IUser } from '../core/interfaces/user';
@@ -68,3 +69,4 @@ export class UserService {
   }
 
 }
+*/

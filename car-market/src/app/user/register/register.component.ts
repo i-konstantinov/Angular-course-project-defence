@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { ErrorsService } from 'src/app/core/error/error.service';
+import { UserStore } from '../user.store';
 
 @Component({
   selector: 'app-register',
@@ -11,20 +12,16 @@ import { UserService } from '../user.service';
 export class RegisterComponent {
 
   constructor(
-    private userService: UserService,
+    private errorsService: ErrorsService,
+    private userStore: UserStore,
     private router: Router
   ) { }
   
   registerSubmitHandler(form: NgForm): void {
     if (form.invalid) { return }
-    this.userService.register(form.value.email, form.value.password, form.value.phone).subscribe({
-      next: () => {
-        this.router.navigate(['/'])
-      },
-      error: (err) => {
-        // console.log(JSON.stringify(err.message));
-        throw err;
-      }
+    this.userStore.register(form.value.email, form.value.password, form.value.phone).subscribe({
+      next: () => this.router.navigate(['/catalog']),
+      error: (err) => this.errorsService.showErrors(err.message, err.error.message)
     })
   }
 }

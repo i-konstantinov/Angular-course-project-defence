@@ -1,5 +1,5 @@
 <h1>Your ads:</h1>
-<div class="catalog" *ngIf="(userAds | async) as ads">
+<div class="catalog" *ngIf="(userAds$ | async) as ads">
     <ul>
         <li class="name" *ngFor="let ad of ads">
             {{ad.brand}} {{ad.model}}
@@ -7,6 +7,6 @@
         </li>
     </ul>
 </div>
-<div class="empty" *ngIf="!(userAds | async)">
+<div class="empty" *ngIf="!(userAds$ | async)">
     <h1>You don't have any ads</h1>
 </div>

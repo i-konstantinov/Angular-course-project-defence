@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { ErrorsService } from './error.service';
 
@@ -12,8 +12,6 @@ import { ErrorsService } from './error.service';
 export class ErrorComponent implements OnInit {
   showErrorMessage = false;
   errors$: Observable<string[]> | undefined;
-  
-  queryParams: Observable<Params> | undefined;
   
   constructor(
     private router: Router,
