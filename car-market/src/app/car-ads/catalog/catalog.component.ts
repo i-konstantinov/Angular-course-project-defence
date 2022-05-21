@@ -1,39 +1,47 @@
 import { CarService } from '../car.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ICarAd } from '../../core/interfaces/car-ad'
 
-import { NgForm } from '@angular/forms';
 import { ISearch } from 'src/app/core/interfaces/search-fields';
+import { finalize, Observable } from 'rxjs';
+import { LoadingService } from 'src/app/core/loading/loading.service';
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css']
 })
-export class CatalogComponent {
+export class CatalogComponent implements OnInit  {
   
-  allCarAds: ICarAd[] | undefined;
+  allCarAds$: Observable<ICarAd[]> | undefined;
   searchedAds: ICarAd[] | undefined = [];
   searching: boolean = false;
 
   constructor(
-    private carAdsService: CarService
-  ) {
-    this.carAdsService.loadAds().subscribe(
-      (data) => this.allCarAds = data
-    )
+    private carAdsService: CarService,
+    private loadingService: LoadingService
+  ) { }
+
+  ngOnInit(): void {
+    this.getAds();
+  }
+
+  getAds() {
+    const ads$ = this.carAdsService.loadAds();
+    const loadingAds$ = this.loadingService.showLoaderUntilCompleted(ads$);
+    this.allCarAds$ = loadingAds$;
   }
   
   cancelSearchHandler(): void {
     this.searching = false;
   }
 
-  searchHandler(form: NgForm): void {
-    const filters = form.value;
-    // form.reset();
-    this.searchedAds = searchFilter(this.allCarAds, filters)
-    this.searching = true;
-  }
+  // searchHandler(form: NgForm): void {
+  //   const filters = form.value;
+  //   // form.reset();
+  //   this.searchedAds = searchFilter(this.allCarAds$, filters)
+  //   this.searching = true;
+  // }
 }
 
 function searchFilter(data: ICarAd[] | undefined, filters: ISearch) {

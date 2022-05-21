@@ -19,6 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ErrorComponent } from './error/error.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PhoneFieldValidatorDirective } from './core/validators/phone-field-validator.directive';
+import { LoadingService } from './core/loading/loading.service';
+import { LoadingComponent } from './core/loading/loading.component';
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import { PhoneFieldValidatorDirective } from './core/validators/phone-field-vali
   ],
   providers: [
     UserService,
-    CarService
+    CarService,
+    LoadingService
   ],
   bootstrap: [AppComponent]
 })

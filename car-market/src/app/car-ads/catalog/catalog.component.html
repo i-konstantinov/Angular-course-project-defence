@@ -1,5 +1,5 @@
 <h1>Car*Market</h1>
-<form #form="ngForm" (ngSubmit)="searchHandler(form)">
+<form #form="ngForm">
   <!-- Search by brand or model -->
   <input #searchBrand="ngModel" ngModel type="text" class="search" name="searchBrand" placeholder="Search for a brand...">
   <br>
@@ -23,7 +23,7 @@
 
 <!-- All Ads -->
 <div *ngIf="!searching" class="catalog">
-  <div class="cube" *ngFor="let ad of allCarAds">
+  <div class="cube" *ngFor="let ad of (allCarAds$ | async)">
     <img class="preview" src="{{(ad.img && ad.img != '') ? ad.img : '../../../../../assets/images/generic.jpg'}}">
     <p class="name">{{ad.brand}} {{ad.model}}</p>
 
@@ -54,6 +54,6 @@
 
 
 <!-- no ads in DB -->
-<div *ngIf="!allCarAds" class="catalog">
+<div *ngIf="!(allCarAds$ | async)" class="catalog">
   <p class="dash">NO ADS YET</p>
 </div>

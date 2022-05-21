@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthActivate } from '../core/auth.activate';
-import { AuthAuthor } from '../core/auth.author';
+import { AuthActivate } from '../core/auth/auth.activate';
+import { AuthAuthor } from '../core/auth/auth.author';
 import { CarDetailsComponent } from './car-details/car-details.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CreateCarAdComponent } from './create-car-ad/create-car-ad.component';

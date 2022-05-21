@@ -8,7 +8,9 @@ const { mapErrors } = require('../utils/mappers');
 
 router.get('/', async (req, res) => {
     const data = await api.getAll();
-    res.json(data).end();
+    setTimeout(() => {
+        res.json(data).end()
+    }, 1000);
 });
 
 router.post('/', isUser(), async (req, res) => {
@@ -29,7 +31,9 @@ router.post('/', isUser(), async (req, res) => {
     try {
         const result = await api.create(newCarAd);
         await updateUserAds(result.authorId, result._id);
-        res.status(201).json(result);
+        setTimeout(() => {
+            res.status(201).json(result);
+        }, 2000);
     } catch (err) {
         console.error(err.message);
         const error = mapErrors(err);
@@ -40,7 +44,8 @@ router.post('/', isUser(), async (req, res) => {
 
 router.get('/:id', preload(), async (req, res) => {
     const carAd = await api.getById(req.params.id);
-    res.json(carAd).end();
+    setTimeout(() => { res.json(carAd).end(); }, 1000);
+    
 });
 
 
@@ -58,7 +63,9 @@ router.put('/:id', preload(), isOwner(), async (req, res) => {
     }
     try {
         const result = await api.updateAd(req.params.id, update);
-        res.json(result);
+        setTimeOut(() => {
+            res.json(result);
+        }, 2000 );
     } catch(err) {
         console.error(err.message);
         const error = mapErrors(err);
@@ -70,7 +77,9 @@ router.put('/:id', preload(), isOwner(), async (req, res) => {
 router.delete('/:id', preload(), isOwner(), async (req, res) => {
     try {
         await api.deleteById(req.params.id);
-        res.status(204);
+        setTimeout(() => {
+            res.status(204);
+        }, 1500);
     } catch (err) {
         console.error(err.message);
         const error = mapErrors(err);

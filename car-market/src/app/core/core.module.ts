@@ -5,19 +5,20 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LocalStorage } from './injection-tokens';
-import { AuthInterceptor } from './auth.interceptor';
+import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthActivate } from './auth.activate';
-import { AuthAuthor } from './auth.author';
+import { AuthActivate } from './auth/auth.activate';
+import { AuthAuthor } from './auth/auth.author';
 import { errorHandlerProvider } from './error-handler';
-import { PriceFieldValidatorDirective } from './validators/price-field-validator.directive';
+import { LoadingComponent } from './loading/loading.component';
 
 
 
 @NgModule({
   declarations: [ 
     HeaderComponent, 
-    FooterComponent
+    FooterComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +26,8 @@ import { PriceFieldValidatorDirective } from './validators/price-field-validator
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LoadingComponent
   ],
   providers: [
     {
