@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const cors = require('./middlewares/cors');
 const auth = require('./middlewares/auth');
@@ -20,16 +21,18 @@ async function start() {
         console.error("Database connection error");
         process.exit(1);
     }
-    
+
     const app = express();
-    app.use(express.json());
-    
+    // app.use(express.json());
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());
+
     app.use(cors());
     app.use(auth());
 
     app.use('/catalog', carAdsController);
     app.use('/user', usersController);
     // app.get('/', (req, res) => res.json({ message: "REST service operational" }));
-    
+
     app.listen(3000, () => console.log("REST service started on port 3000"));
 }

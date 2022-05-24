@@ -1,9 +1,9 @@
 <h1>Car*Market</h1>
-<form #form="ngForm">
+<form #form="ngForm" (submit)="searchHandler(form)">
   <!-- Search by brand or model -->
-  <input #searchBrand="ngModel" ngModel type="text" class="search" name="searchBrand" placeholder="Search for a brand...">
+  <input ngModel type="text" class="search" name="brand" placeholder="Search for a brand...">
   <br>
-  <input #searchModel="ngModel" ngModel type="text" class="search" name="searchModel" placeholder="Search for a model...">
+  <input ngModel type="text" class="search" name="model" placeholder="Search for a model...">
   <br>
   <!-- Search by year -->
   <input #minYear="ngModel" ngModel type="number" name="minYear" class="difficulty" placeholder="Year from...">
@@ -16,44 +16,48 @@
   <input #maxPrice="ngModel" ngModel type="number" name="maxPrice" class="difficulty" placeholder="Price to...">
   <br>
   <!-- Search by location -->
-  <input #searchLocation="ngModel" ngModel type="text" name="searchLocation" class="difficulty" placeholder="Location...">
+  <input ngModel type="text" name="location" class="difficulty" placeholder="Location...">
+  <br>
+  <!-- Search by swappability -->
+  <label class="dash" for="isSwappable">Show only swappable choices?
+    <input ngModel class="checkbox" type="checkbox" id="isSwappable" name="isSwappable">
+  </label>
+  <br>
   <br>
   <input type="submit" value="search">
 </form>
 
-<!-- All Ads -->
-<div *ngIf="!searching" class="catalog">
-  <div class="cube" *ngFor="let ad of (allCarAds$ | async)">
-    <img class="preview" src="{{(ad.img && ad.img != '') ? ad.img : '../../../../../assets/images/generic.jpg'}}">
-    <p class="name">{{ad.brand}} {{ad.model}}</p>
 
-    <div #BriefInfo class="description">
-      <p><span>Price:</span>{{ad.price}} BGN</p>
-      <p><span>Year:</span>{{ad.year}}</p>
-      <p><span>Location:</span>{{ad.location}}</p>
+<!-- Catalog / Browse Search Results -->
+<ng-container *ngIf="!detailView" class="catalog">
+  <ng-container *ngIf="(ads$ | async) as ads">
+
+    <div *ngIf="!searching && ads.length == 0" class="catalog">
+      <p class="dash">NO ADS YET</p>
+    </div>
+    <div *ngIf="searching && ads.length == 0" class="catalog">
+      <p class="dash">No matching ads...</p>
     </div>
 
-    <a routerLink="/details/{{ad._id}}" class="btn">Details</a>
-  </div>
-</div>
+    <div class="cube" *ngFor="let ad of ads">
+      <img class="preview" src="{{(ad.img && ad.img != '') ? ad.img : '../../../../../assets/images/generic.jpg'}}">
+      <p class="name">{{ad.brand}} {{ad.model}}</p>
 
-<!-- Ad-search results -->
-<div *ngIf="searching" class="catalog">
-  <div class="cube" *ngFor="let ad of searchedAds">
-    <img class="preview" src="{{(ad.img && ad.img != '') ? ad.img : '../../../../../assets/images/generic.jpg'}}">
-    <p class="name">{{ad.brand}} {{ad.model}}</p>
-    <p><span>Price:</span>{{ad.price}} $</p>
+      <div class="description">
+        <p><span>Price:</span>{{ad.price}} BGN</p>
+        <p><span>Year:</span>{{ad.year}}</p>
+        <p><span>Location:</span>{{ad.location}}</p>
+      </div>
 
+      <a (click)="showDetailsHandler(ad)" class="btn">Details</a>
+    </div>
+  </ng-container>
 
-    <a routerLink="/details/{{ad._id}}" class="btn">Details</a>
-  </div>
-  <br>
-  <p *ngIf="searchedAds!.length == 0" class="dash">No matching ads...</p>
-  <button class="cancel" (click)="cancelSearchHandler()">Cancel Search</button>
-</div>
+  <a *ngIf="searching && !detailView" class="btn" (click)="cancelSearchHandler()">Cancel Search</a>
+</ng-container>
 
 
-<!-- no ads in DB -->
-<div *ngIf="!(allCarAds$ | async)" class="catalog">
-  <p class="dash">NO ADS YET</p>
-</div>
+<ng-container *ngIf="detailView">
+  <app-car-ad-details [carAd]="detailView"></app-car-ad-details>
+  <a class="btn" (click)="onBackToBrowsing()">Back To Browsing</a>
+</ng-container>

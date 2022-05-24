@@ -31,7 +31,7 @@
       </p>
     </ng-container>
 
-    <label for="name">Description</label>
+    <label for="description">Description</label>
     <textarea #description="ngModel" ngModel id="description" name="description" required minlength="10"></textarea>
     <!--Description field errors-->
     <p *ngIf="description.touched && description.errors?.['required']" class="error">
@@ -42,11 +42,7 @@
     </p>
 
     <label for="image">ImageUrl</label>
-    <input #img="ngModel" ngModel type="text" id="img" name="img" required>
-    <!--Img field errors-->
-    <p *ngIf="img.touched && img.errors?.['required']" class="error">
-      Image is required!
-    </p>
+    <input ngModel type="text" id="img" name="img">
 
     <label for="location">Location</label>
     <input #location="ngModel" ngModel type="text" id="location" name="location" required>
@@ -70,7 +66,7 @@
       </p>
     </ng-container>
 
-    <label for="price">Phone</label>
+    <label for="phone">Phone</label>
     <input #phone="ngModel" ngModel type="text" id="phone" name="phone" required="true" minlength="10">
     <!--Phone field errors-->
     <p *ngIf="phone.touched && phone.errors?.['required']" class="error">
@@ -80,8 +76,8 @@
       Phone must be at least 10 characters long
     </p>
 
-    <label class="checkbox" for="price">Can this vehicle be swapped?
-      <input #isSwappable="ngModel" ngModel type="checkbox" id="isSwappable" name="isSwappable">
+    <label class="checkbox" for="isSwappable">Can this vehicle be swapped?
+      <input ngModel type="checkbox" id="isSwappable" name="isSwappable">
     </label>
     <br>
     <input type="submit" value="Create">

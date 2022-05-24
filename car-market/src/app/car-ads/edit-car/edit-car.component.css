@@ -29,7 +29,7 @@ textarea {
     margin: 8px 0 2em;
 }
 
-input[type=submit] {
+a.update {
     background-color: #f5ce62;
     border: none;
     padding: 8px;
@@ -44,15 +44,31 @@ input[type=submit] {
     text-transform: uppercase;
     border-radius: 5px;
 }
-
-input[type=submit]:hover {
-    background-color: #ff6600;
+a.update:hover {
+    background-color: #19b002;
     cursor: pointer;
 }
 
-input.difficulty {
-    width: 20%;
+a.delete {
+    background-color: #f5ce62;
+    border: none;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    width: 50%;
+    margin-top: 30px;
+    color: rgb(83, 81, 81);
+    text-transform: uppercase;
+    border-radius: 5px;
 }
+a.delete:hover {
+    background-color: #ff0000;
+    cursor: pointer;
+}
+
 
 input[type='checkbox'] {
     width: 10%;
@@ -74,7 +90,7 @@ ul.errors {
 
 h1 {
     font-weight: bold;
-    color: #385169;
+    color: #ffffff;
 }
 
 p.error {

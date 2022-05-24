@@ -22,7 +22,7 @@ export class CreateCarAdComponent {
 
     let carAd = form.value;
 
-    carAd.isSwappable == "" ? carAd.isSwappable = false : null;
+    carAd.isSwappable == "" ? carAd.isSwappable = false : carAd.isSwappable = true;
 
     this.carService.createAd(carAd).subscribe({
       error: (err) => this.errorsService.showErrors(err.error.message),

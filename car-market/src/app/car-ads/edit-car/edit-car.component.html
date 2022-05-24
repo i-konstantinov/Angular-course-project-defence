@@ -1,6 +1,6 @@
-<h1>Edit Ad</h1>
+<h1>Edit or Delete Ad</h1>
 <div class="form" *ngIf="carAd | async as ad">
-  <form #form="ngForm" (ngSubmit)="updateHandler(form, ad._id)">
+  <form #form="ngForm">
     
     <label for="brand">Brand</label>
     <input #brand="ngModel" [ngModel]="ad.brand" type="text" id="brand" name="brand" required minlength="3">
@@ -31,7 +31,7 @@
       </p>
     </ng-container>
 
-    <label for="name">Description</label>
+    <label for="description">Description</label>
     <textarea #description="ngModel" [ngModel]="ad.description" id="description" name="description" required minlength="10"></textarea>
     <!--Description field errors-->
     <p *ngIf="description.touched && description.errors?.['required']" class="error">
@@ -70,7 +70,7 @@
       </p>
     </ng-container>
 
-    <label for="price">Phone</label>
+    <label for="phone">Phone</label>
     <input #phone="ngModel" [ngModel]="ad.phone" type="text" id="phone" name="phone" required="true" minlength="10">
     <!--Phone field errors-->
     <p *ngIf="phone.touched && phone.errors?.['required']" class="error">
@@ -80,13 +80,16 @@
       Phone must be at least 10 characters long
     </p>
 
-    <label class="checkbox" for="price">Can this vehicle be swapped?
-      <input #isSwappable="ngModel" [ngModel]="ad.isSwappable" type="checkbox" id="isSwappable" name="isSwappable">
+    <label class="checkbox" for="isSwappable">Can this vehicle be swapped?
+      <input [ngModel]="ad.isSwappable" type="checkbox" id="isSwappable" name="isSwappable">
     </label>
 
-    <br> 
+    <br>
+    <br>
 
-    <input type="submit" value="Update">
+    <a class="update" (click)="updateHandler(form, ad._id)">Update</a>
+    <br>
+    <a class="delete" (click)="deleteHandler(ad._id)">Delete</a>
+    
   </form>
 </div>
-<div class="form" *ngIf="!(carAd | async)">Loading data. . .</div>

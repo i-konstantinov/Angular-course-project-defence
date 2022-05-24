@@ -7,7 +7,12 @@ const { mapErrors } = require('../utils/mappers');
 
 
 router.get('/', async (req, res) => {
-    const data = await api.getAll();
+    let data;
+    if (Object.keys(req.query).length > 0) {
+        data = await api.searchAds(req.query);
+    } else {
+        data = await api.getAll();
+    }
     setTimeout(() => {
         res.json(data).end()
     }, 1000);
@@ -87,5 +92,6 @@ router.delete('/:id', preload(), isOwner(), async (req, res) => {
     }
     setTimeout(() => { res.end() }, 1000);
 });
+
 
 module.exports = router;

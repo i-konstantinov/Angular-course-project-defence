@@ -1,11 +1,14 @@
 import { CarService } from '../car.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ICarAd } from '../../core/interfaces/car-ad'
 
-import { ISearch } from 'src/app/core/interfaces/search-fields';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs'
 import { LoadingService } from 'src/app/core/loading/loading.service';
 import { ErrorsService } from 'src/app/core/error/error.service';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserStore } from 'src/app/user/user.store';
 
 @Component({
   selector: 'app-catalog',
@@ -14,22 +17,28 @@ import { ErrorsService } from 'src/app/core/error/error.service';
 })
 export class CatalogComponent implements OnInit  {
   
-  allCarAds$: Observable<ICarAd[]> | undefined;
-  searchedAds: ICarAd[] | undefined = [];
+  ads$!: Observable<ICarAd[]>;
+  
   searching: boolean = false;
+
+  detailView!: ICarAd | null;
 
   constructor(
     private carAdsService: CarService,
     private loadingService: LoadingService,
-    private errorsService: ErrorsService
+    private errorsService: ErrorsService,
+    private userStore: UserStore,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.getAds();
+    let userId;
+    this.userStore.user$.subscribe(data => userId = data._id);
   }
 
   getAds() {
-    const ads$ = this.carAdsService.loadAds()
+    const allAds$ = this.carAdsService.loadAds()
       .pipe(
         catchError(err => {
           this.errorsService.showErrors(err.error.message);
@@ -37,78 +46,48 @@ export class CatalogComponent implements OnInit  {
           return throwError(err);
         })
       );
-    const loadingAds$ = this.loadingService.showLoaderUntilCompleted(ads$);
-    this.allCarAds$ = loadingAds$;
+    const loadingAds$ = this.loadingService.showLoaderUntilCompleted(allAds$);
+    this.ads$ = loadingAds$;
   }
   
+
+  searchHandler(form: NgForm): void {
+    const query = form.value;
+    query.isSwappable == '' ? query.isSwappable = false : query.isSwappable = true;
+
+    this.searching = true;
+
+    const results$ = this.carAdsService.searchAds(query)
+      .pipe(
+        catchError(err => {
+          this.errorsService.showErrors(err.error.message);
+          console.log("Error :", err);
+          return throwError(err);
+        })
+      );
+    const loadingResults$ = this.loadingService.showLoaderUntilCompleted(results$);
+    this.ads$ = loadingResults$;
+  }
+
   cancelSearchHandler(): void {
     this.searching = false;
+    this.getAds();
   }
 
-  // searchHandler(form: NgForm): void {
-  //   const filters = form.value;
-  //   // form.reset();
-  //   this.searchedAds = searchFilter(this.allCarAds$, filters)
-  //   this.searching = true;
-  // }
-}
-
-function searchFilter(data: ICarAd[] | undefined, filters: ISearch) {
-  if (!data || data.length == 0) { return data };
-  
-  let known: ICarAd[] = [];
-
-  if (filters.searchBrand) {
-    known = data.filter(ad => ad.brand.toLowerCase().includes(filters.searchBrand.toLowerCase()));
+  showDetailsHandler(ad: ICarAd): void {
+    this.detailView = ad;
   }
 
-  if (filters.searchModel) {
-    if (known.length > 0) {
-      known = known.filter(ad => ad.model.toLowerCase().includes(filters.searchModel.toLowerCase()));
-    } else {
-      known = data.filter(ad => ad.model.toLowerCase().includes(filters.searchModel.toLowerCase()));
-    }
+  onBackToBrowsing(): void {
+    this.detailView = null;
   }
 
-  if (filters.searchLocation) {
-    if (known.length > 0) {
-      known = known.filter(ad => ad.location.toLowerCase().includes(filters.searchLocation.toLowerCase()));
-    } else {
-      known = data.filter(ad => ad.location.toLowerCase().includes(filters.searchLocation.toLowerCase()));
-    }
+  deleteHandler(id: string) {
+    if (confirm("Are you sure you want to delete this ad ?")) {
+      this.carAdsService.deleteAd(id).subscribe({
+        error: (err) => this.errorsService.showErrors(err.message, err.error.messages),
+        complete: () => this.router.navigate(['/catalog'])
+      });
+    } else { return };
   }
-
-  if (filters.minPrice) {
-    if (known.length > 0) {
-      known = known.filter(ad => ad.price >= filters.minPrice);
-    } else {
-      known = data.filter(ad => ad.price >= filters.minPrice);
-    }
-  }
-
-  if (filters.maxPrice) {
-    if (known.length > 0) {
-      known = known.filter(ad => ad.price <= filters.maxPrice);
-    } else {
-      known = data.filter(ad => ad.price <= filters.maxPrice);
-    }
-  }
-
-  if (filters.minYear) {
-    if (known.length > 0) {
-      known = known.filter(ad => ad.year >= filters.minYear);
-    } else {
-      known = data.filter(ad => ad.year >= filters.minYear);
-    }
-  }
-
-  if (filters.maxYear) {
-    if (known.length > 0) {
-      known = known.filter(ad => ad.year <= filters.maxYear);
-    } else {
-      known = data.filter(ad => ad.year <= filters.maxYear);
-    }
-  }
-
-  return known;
 }

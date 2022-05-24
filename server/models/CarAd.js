@@ -18,7 +18,7 @@ const schema = new Schema({
             return value.startsWith('+359') || value.startsWith('0');
         }, message: "Enter a valid phone number"
     } },
-    img: { type: String, required: true },
+    img: { type: String },
     isSwappable: { type: Boolean, default: false },
     authorId: { type: ObjectId, ref: "User" },
     comments: { type: [String], default: [] }

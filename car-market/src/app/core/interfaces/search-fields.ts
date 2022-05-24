@@ -1,9 +1,10 @@
 export interface ISearch {
-    searchBrand: string,
-    searchModel: string,
+    brand: string,
+    model: string,
     minYear: number,
     maxYear: number,
     minPrice: number,
     maxPrice: number,
-    searchLocation: string
+    location: string,
+    isSwappable: boolean
 }

@@ -29,10 +29,22 @@ export class EditCarComponent implements OnInit {
 
   updateHandler(form: NgForm, id: string) {
     if (form.invalid) { return };
-    this.carsService.updateAd(id, form.value)
-    .subscribe({
-      error: (err) => this.errorsService.showErrors(err.error.message),
-      next: () => this.router.navigate(['/details/' + this.activatedRoute.snapshot.params['id']])
-    });
+    const updated = form.value;
+    updated.isSwappable == "" ? updated.isSwappable = false : updated.isSwappable = true;
+
+    this.carsService.updateAd(id, updated)
+      .subscribe({
+        error: (err) => this.errorsService.showErrors(err.error.message),
+        next: () => this.router.navigate(['/catalog'])
+      });
+  }
+
+  deleteHandler(id: string) {
+    if (!confirm("Are you sure you want to delete this ad?")) { return };
+    this.carsService.deleteAd(id)
+      .subscribe({
+        error: (err) => this.errorsService.showErrors(err.error.message),
+        next: () => this.router.navigate(['/catalog'])
+      });
   }
 }

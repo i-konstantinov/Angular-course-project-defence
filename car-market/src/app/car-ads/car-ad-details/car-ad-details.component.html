@@ -1,0 +1,18 @@
+<h1>{{carAd.brand}}, {{carAd.model}}</h1>
+  <div class="imgHolder">
+    <img class="car" src="{{carAd.img ? carAd.img : '../../../assets/images/generic.jpg'}}">
+  </div>
+  
+  <div class="details">
+    <p><span>Description:</span> {{carAd.description}}</p>
+    <p><span>Year:</span> {{carAd.year}}</p>
+    <p><span>Price:</span>$ {{carAd.price}}</p>
+    <p><span>Location:</span> {{carAd.location}}</p>
+    <p><span>Seller's phone:</span> {{carAd.phone}}</p>
+
+    <p class="swappable" *ngIf="carAd.isSwappable">CAN BE SWAPPED</p>
+    <p class="unSwappable" *ngIf="!carAd.isSwappable">CANNOT BE SWAPPED</p>
+    
+    <!-- if user is author -->
+    <a *ngIf="carAd.authorId == userId" class="btn" routerLink="/edit/{{carAd._id}}">Modify</a>
+  </div>
