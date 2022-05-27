@@ -45,6 +45,9 @@
         <p *ngIf="password.touched && password.errors?.['minlength']" class="error">
             Password must be at least 6 characters!
         </p>
+        <p *ngIf="(password.value != rePass.value) && (password.touched || rePass.touched) && !password.errors" class="error">
+            Repeat password field must match original!
+        </p>
 
         <input type="submit" value="Register">
     </form>

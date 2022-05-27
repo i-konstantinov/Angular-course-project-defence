@@ -12,9 +12,7 @@ import { UserStore } from '../user.store';
 })
 export class ProfileComponent implements OnInit {
   userAds$: Observable<ICarAd[]> | undefined;
-  constructor(
-    private store: UserStore
-  ) { }
+  constructor( private store: UserStore ) { }
 
   ngOnInit(): void {
     this.userAds$ = this.store.getAdsByUser();

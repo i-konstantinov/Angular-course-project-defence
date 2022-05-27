@@ -2,7 +2,7 @@ import { CarAdsService } from '../car-ads.service';
 import { Component, OnInit } from '@angular/core';
 import { ICarAd } from '../../core/interfaces/car-ad'
 
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs'
 import { LoadingService } from 'src/app/core/loading/loading.service';
 import { ErrorsService } from 'src/app/core/error/error.service';
