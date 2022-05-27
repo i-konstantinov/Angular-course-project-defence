@@ -10,7 +10,7 @@ const API_URL = environment.API_URL;
 @Injectable({
   providedIn: "root"
 })
-export class CarService {
+export class CarAdsService {
   constructor(private http: HttpClient) { }
 
   loadAds(): Observable<ICarAd[]> {

@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { CatalogComponent } from "./catalog/catalog.component";
 import { CreateCarAdComponent } from './create-car-ad/create-car-ad.component';
-import { EditCarComponent } from './edit-car/edit-car.component';
+import { EditCarAdComponent } from './edit-car-ad/edit-car-ad.component';
 import { FormsModule } from "@angular/forms";
 import { YearFiledValidatorDirective } from "../core/validators/year-filed-validator.directive";
 import { PriceFieldValidatorDirective } from "../core/validators/price-field-validator.directive";
@@ -14,7 +14,7 @@ import { CarAdDetailsComponent } from './car-ad-details/car-ad-details.component
     declarations: [ 
         CatalogComponent,
         CreateCarAdComponent,
-        EditCarComponent,
+        EditCarAdComponent,
         YearFiledValidatorDirective,
         PriceFieldValidatorDirective,
         CarAdDetailsComponent
@@ -30,4 +30,4 @@ import { CarAdDetailsComponent } from './car-ad-details/car-ad-details.component
         CreateCarAdComponent 
     ]
   })
-export class CarModule { }
+export class CarAdsModule { }

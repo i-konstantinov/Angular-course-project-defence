@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthActivate } from '../core/auth/auth.activate';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CreateCarAdComponent } from './create-car-ad/create-car-ad.component';
-import { EditCarComponent } from './edit-car/edit-car.component';
+import { EditCarAdComponent } from './edit-car-ad/edit-car-ad.component';
 
 const routes: Routes = [
     {
@@ -21,7 +21,7 @@ const routes: Routes = [
     },
     {
         path: 'edit/:id',
-        component: EditCarComponent,
+        component: EditCarAdComponent,
         canActivate: [AuthActivate],
         data: {
             authRequired: true,
@@ -34,4 +34,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class CarRoutingModule { }
+export class CarAdsRoutingModule { }

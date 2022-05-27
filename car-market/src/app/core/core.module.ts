@@ -11,6 +11,7 @@ import { AuthActivate } from './auth/auth.activate';
 
 import { LoadingComponent } from './loading/loading.component';
 import { ErrorComponent } from './error/error.component';
+import { AboutComponent } from './about/about.component';
 
 
 
@@ -18,6 +19,7 @@ import { ErrorComponent } from './error/error.component';
   declarations: [ 
     HeaderComponent, 
     FooterComponent,
+    AboutComponent,
     LoadingComponent,
     ErrorComponent
   ],
@@ -29,6 +31,7 @@ import { ErrorComponent } from './error/error.component';
     HeaderComponent,
     FooterComponent,
     LoadingComponent,
+    AboutComponent,
     ErrorComponent
   ],
   providers: [

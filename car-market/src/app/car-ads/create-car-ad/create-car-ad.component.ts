@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import {  NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CarService } from '../car.service';
+import { CarAdsService } from '../car-ads.service';
 import { ErrorsService } from 'src/app/core/error/error.service';
-import { UserStore } from 'src/app/user/user.store';
 
 @Component({
   selector: 'app-create-car-ad',
@@ -14,7 +13,7 @@ export class CreateCarAdComponent {
 
   constructor(
     private errorsService: ErrorsService,
-    private carService: CarService,
+    private carAdsService: CarAdsService,
     private router: Router
   ) { }
 
@@ -25,7 +24,7 @@ export class CreateCarAdComponent {
 
     carAd.isSwappable == "" ? carAd.isSwappable = false : carAd.isSwappable = true;
 
-    this.carService.createAd(carAd).subscribe({
+    this.carAdsService.createAd(carAd).subscribe({
       error: (err) => this.errorsService.showErrors(err.error.message),
       complete: () => this.router.navigate(['/catalog'])
     });

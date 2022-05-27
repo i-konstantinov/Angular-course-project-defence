@@ -1,4 +1,4 @@
-import { CarService } from '../car.service';
+import { CarAdsService } from '../car-ads.service';
 import { Component, OnInit } from '@angular/core';
 import { ICarAd } from '../../core/interfaces/car-ad'
 
@@ -26,7 +26,7 @@ export class CatalogComponent implements OnInit  {
   detailView!: ICarAd | null;
 
   constructor(
-    private carAdsService: CarService,
+    private carAdsService: CarAdsService,
     private loadingService: LoadingService,
     private errorsService: ErrorsService,
     private userStore: UserStore,
