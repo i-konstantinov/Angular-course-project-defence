@@ -52,12 +52,12 @@
       <a (click)="showDetailsHandler(ad)" class="btn">Details</a>
     </div>
   </ng-container>
-
-  <a *ngIf="searching && !detailView" class="btn" (click)="cancelSearchHandler()">Cancel Search</a>
+  <br>
+  <a *ngIf="searching && !detailView" class="back-btn" (click)="cancelSearchHandler()">Cancel Search</a>
 </ng-container>
 
 
 <ng-container *ngIf="detailView">
-  <app-car-ad-details [carAd]="detailView"></app-car-ad-details>
-  <a class="btn" (click)="onBackToBrowsing()">Back To Browsing</a>
+  <app-car-ad-details [userId]="userId" [carAd]="detailView"></app-car-ad-details>
+  <a class="back-btn" (click)="onBackToBrowsing()">Back To Browsing</a>
 </ng-container>

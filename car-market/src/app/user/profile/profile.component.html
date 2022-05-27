@@ -3,7 +3,7 @@
     <ul>
         <li class="name" *ngFor="let ad of ads">
             {{ad.brand}} {{ad.model}}
-            <a routerLink="/details/{{ad._id}}" class="btn">Details</a>
+            <a routerLink="/edit/{{ad._id}}" class="btn">Modify</a>
         </li>
     </ul>
 </div>

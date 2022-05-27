@@ -48,13 +48,14 @@ async function getAddsByAuthorId(userId) {
     return CarAd.find({}).where('authorId').equals(userId);
 }
 
+/*
 async function updateUserAds(userId, adId) {
     const user = await User.findOne({ _id: userId });
     user.carAds.push(adId);
     await user.save();
     return user.carAds;
 }
-
+*/
 
 function createSession(user) {
     return {
@@ -95,5 +96,5 @@ module.exports = {
     logout,
     verifySession,
     getAddsByAuthorId,
-    updateUserAds
+    getUserByEmail
 }

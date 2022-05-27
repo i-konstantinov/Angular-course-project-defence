@@ -77,6 +77,26 @@ button:hover, a.btn:hover {
     cursor: pointer;
 }
 
+.back-btn {
+    border: none;
+    padding: 8px;
+    text-transform: capitalize;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    font-size: 18px;
+    width: 43%;
+    margin: 12px;
+    border-radius: 4px;
+    background: #607588;
+    color: white;
+}
+.back-btn:hover {
+    background-color: #0B2133;
+    color: white;
+    cursor: pointer;
+}
+
 /* form */
 
 input[type=submit] {

@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { isUser, isOwner } = require('../middlewares/guards');
 const preload = require('../middlewares/preload');
 const api = require('../services/carAds');
-const { updateUserAds } = require('../services/users');
 const { mapErrors } = require('../utils/mappers');
 
 
@@ -35,8 +34,7 @@ router.post('/', isUser(), async (req, res) => {
     }
 
     try {
-        const result = await api.create(newCarAd);
-        await updateUserAds(result.authorId, result._id);
+        await api.create(newCarAd);
     } catch (err) {
         console.error(err.message);
         const error = mapErrors(err);
@@ -67,8 +65,7 @@ router.put('/:id', preload(), isOwner(), async (req, res) => {
         isSwappable: req.body.isSwappable
     }
     try {
-        const result = await api.updateAd(req.params.id, update);
-        res.json(result);
+        await api.updateAd(req.params.id, update);
     } catch(err) {
         console.error(err.message);
         const error = mapErrors(err);

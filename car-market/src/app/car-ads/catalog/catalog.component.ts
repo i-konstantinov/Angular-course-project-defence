@@ -1,5 +1,5 @@
 import { CarService } from '../car.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ICarAd } from '../../core/interfaces/car-ad'
 
 import { catchError, tap } from 'rxjs/operators';
@@ -19,6 +19,8 @@ export class CatalogComponent implements OnInit  {
   
   ads$!: Observable<ICarAd[]>;
   
+  userId: string | undefined = undefined;
+
   searching: boolean = false;
 
   detailView!: ICarAd | null;
@@ -33,11 +35,16 @@ export class CatalogComponent implements OnInit  {
 
   ngOnInit(): void {
     this.getAds();
-    let userId;
-    this.userStore.user$.subscribe(data => userId = data._id);
+    this.userStore.user$.subscribe({
+      next: (data) => {
+        if (data) {
+          this.userId = data._id
+        }
+      }
+    });
   }
 
-  getAds() {
+  getAds():void {
     const allAds$ = this.carAdsService.loadAds()
       .pipe(
         catchError(err => {
@@ -84,7 +91,8 @@ export class CatalogComponent implements OnInit  {
 
   deleteHandler(id: string) {
     if (confirm("Are you sure you want to delete this ad ?")) {
-      this.carAdsService.deleteAd(id).subscribe({
+      const deleting$ = this.carAdsService.deleteAd(id)
+      this.loadingService.showLoaderUntilCompleted(deleting$).subscribe({
         error: (err) => this.errorsService.showErrors(err.message, err.error.messages),
         complete: () => this.router.navigate(['/catalog'])
       });

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { isUser, isGuest } = require('../middlewares/guards');
-const { register, login, getAddsByAuthorId, logout, updateUserAds } = require('../services/users');
+const { register, login, getAddsByAuthorId, logout, getUserByEmail } = require('../services/users');
 const { mapErrors } = require('../utils/mappers');
 
 
@@ -48,6 +48,18 @@ router.get('/myads', isUser(), async (req, res) => {
     try {
         const result = await getAddsByAuthorId(req.user._id)
         res.json(result);
+    } catch (err) {
+        console.error(err.message);
+        const error = mapErrors(err);
+        res.status(400).json({ message: error });
+    }
+    res.end();
+});
+
+router.get('/info', isUser(), async (req, res) => {
+    try {
+        const user = await getUserByEmail(req.user.email);
+        res.json(user);
     } catch (err) {
         console.error(err.message);
         const error = mapErrors(err);

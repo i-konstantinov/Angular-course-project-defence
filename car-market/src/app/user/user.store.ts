@@ -66,5 +66,18 @@ export class UserStore {
     getAdsByUser() {
         return this.http.get<ICarAd[] | []>(API_URL + '/user/myads')
         .pipe( shareReplay() );
-      }
+    }
+
+    updateUserInfo() {
+        return this.http.get<IUser>(API_URL + '/user/info')
+        .pipe(
+            tap(userInfo => {
+                console.log(userInfo)
+                this.localStorage.removeItem("<USER>");
+                this.subject.next(userInfo);
+                this.localStorage.setItem("<USER>", JSON.stringify(userInfo));
+            }),
+            shareReplay()
+        );
+    }
 }

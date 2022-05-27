@@ -8,7 +8,7 @@ import { LocalStorage } from './injection-tokens';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthActivate } from './auth/auth.activate';
-import { AuthAuthor } from './auth/auth.author';
+
 import { LoadingComponent } from './loading/loading.component';
 import { ErrorComponent } from './error/error.component';
 
@@ -41,8 +41,7 @@ import { ErrorComponent } from './error/error.component';
       useClass: AuthInterceptor,
       multi: true
     },
-    AuthActivate,
-    AuthAuthor
+    AuthActivate
   ]
 })
 export class CoreModule { }

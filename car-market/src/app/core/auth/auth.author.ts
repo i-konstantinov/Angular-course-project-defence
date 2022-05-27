@@ -1,3 +1,4 @@
+/*
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router, UrlTree } from "@angular/router";
 import { map } from "rxjs";
@@ -23,3 +24,5 @@ export class AuthAuthor implements CanActivate {
         return this.router.parseUrl(RedirectTo);
     }
 }
+*/
+// does not work with the master-detail pattern

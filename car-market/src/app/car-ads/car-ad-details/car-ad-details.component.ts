@@ -11,19 +11,9 @@ import { CarService } from '../car.service';
   templateUrl: './car-ad-details.component.html',
   styleUrls: ['./car-ad-details.component.css']
 })
-export class CarAdDetailsComponent implements OnInit {
+export class CarAdDetailsComponent {
   @Input()
   carAd!: ICarAd;
-  userId: string = '';
-
-  constructor(
-    private carAdsService: CarService,
-    private userStore: UserStore,
-    private errorsService: ErrorsService,
-    private router: Router
-  ) { }
-  ngOnInit(): void {
-    this.userStore.user$.subscribe(data => this.userId = data._id);
-  }
-
+  @Input()
+  userId: string | undefined;
 }
